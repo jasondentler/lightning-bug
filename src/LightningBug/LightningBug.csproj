@@ -39,13 +39,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataRowExtensions.cs" />
-    <Compile Include="DataTableExtensions.cs" />
-    <Compile Include="GetterDelegateCache.cs" />
-    <Compile Include="ObjectDataReader.cs" />
+    <Compile Include="Data\DataRowExtensions.cs" />
+    <Compile Include="Data\DataTableExtensions.cs" />
+    <Compile Include="Data\GetterDelegateCache.cs" />
+    <Compile Include="Data\ObjectDataReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReflectionExtensions.cs" />
-    <Compile Include="SetterDelegateCache.cs" />
+    <Compile Include="Data\ReflectionExtensions.cs" />
+    <Compile Include="Data\SetterDelegateCache.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

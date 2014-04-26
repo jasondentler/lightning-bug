@@ -7,7 +7,7 @@
     <ProjectGuid>{0D7E10F4-6CCA-4161-8452-BE7E9080948A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LightningBug.Tests</RootNamespace>
+    <RootNamespace>LightningBug</RootNamespace>
     <AssemblyName>LightningBug.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -47,11 +47,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataRowExtensionsFixture.cs" />
-    <Compile Include="DataTableExtensionsFixture.cs" />
-    <Compile Include="ReflectionExtensionsFixture.cs" />
-    <Compile Include="SetterDelegateCacheFixture.cs" />
-    <Compile Include="GetterDelegateCacheFixture.cs" />
+    <Compile Include="Data\DataRowExtensionsFixture.cs" />
+    <Compile Include="Data\DataTableExtensionsFixture.cs" />
+    <Compile Include="Data\ReflectionExtensionsFixture.cs" />
+    <Compile Include="Data\SetterDelegateCacheFixture.cs" />
+    <Compile Include="Data\GetterDelegateCacheFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

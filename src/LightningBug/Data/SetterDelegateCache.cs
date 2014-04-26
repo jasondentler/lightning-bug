@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace LightningBug
+namespace LightningBug.Data
 {
 
     public static class SetterDelegateCache<TInstanceType>

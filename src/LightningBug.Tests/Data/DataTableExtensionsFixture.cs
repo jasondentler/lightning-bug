@@ -3,7 +3,7 @@ using System.Linq;
 using Should;
 using Xunit;
 
-namespace LightningBug.Tests
+namespace LightningBug.Data
 {
     public class DataTableExtensionsFixture
     {

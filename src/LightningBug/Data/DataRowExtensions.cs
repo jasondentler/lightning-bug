@@ -1,7 +1,7 @@
 using System;
 using System.Data;
 
-namespace LightningBug
+namespace LightningBug.Data
 {
     public static class DataRowExtensions
     {
