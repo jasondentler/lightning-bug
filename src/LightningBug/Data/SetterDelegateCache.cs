@@ -55,6 +55,8 @@ namespace LightningBug.Data
 
         public static void Write(string propertyName, TInstanceType instance, object value)
         {
+            if (Types[propertyName] == typeof (DateTime))
+                value = DateTime.Parse(value.ToString());
             Setters[propertyName](instance, value);
         }
 

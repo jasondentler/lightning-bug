@@ -1,0 +1,1194 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>Microsoft.SqlServer.PipelineHost</name>
+  </assembly>
+  <members>
+    <member name="T:Microsoft.SqlServer.Dts.Pipeline.BackPressureException">
+      <summary>The exception that is thrown when the <see cref="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.IsInputReady(System.Int32[],System.Boolean[]@)" /> and <see cref="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.GetDependentInputs(System.Int32)" /> methods that handle back pressure in the data flow encounter an unexpected error.</summary>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.BackPressureException.#ctor(System.String)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.BackPressureException" /> class.</summary>
+      <param name="message">A message that describes the exception.</param>
+    </member>
+    <member name="T:Microsoft.SqlServer.Dts.Pipeline.BlobColumn">
+      <summary>Defines a column in a data flow buffer that contains data that has a SQL Server data type of text, ntext, or image.</summary>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.BlobColumn.AddBlobData(System.Byte[])">
+      <summary>Adds binary data to a <see cref="T:Microsoft.SqlServer.Dts.Pipeline.BlobColumn" /> column.</summary>
+      <param name="data">The binary data that is appended to the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.BlobColumn" /> object.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.BlobColumn.AddBlobData(System.Byte[],System.Int32)">
+      <summary>Adds a specified number of bytes of binary data to a <see cref="T:Microsoft.SqlServer.Dts.Pipeline.BlobColumn" /> column.</summary>
+      <param name="data">The binary data that is appended to the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.BlobColumn" /> object.</param>
+      <param name="count">The number of bytes of binary data to be appended.</param>
+    </member>
+    <member name="P:Microsoft.SqlServer.Dts.Pipeline.BlobColumn.ColumnInfo">
+      <summary>Gets read-only metadata about the column.</summary>
+      <returns>A <see cref="T:Microsoft.SqlServer.Dts.Pipeline.BufferColumn" /> that contains read-only metadata about the column.</returns>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.BlobColumn.GetBlobData(System.Int32,System.Int32)">
+      <summary>Returns the specified portion of the data in the column.</summary>
+      <returns>An array of bytes that contains the specified portion of the data in the column.</returns>
+      <param name="offset">The byte index at which to begin retrieving data.</param>
+      <param name="count">The number of bytes of data to retrieve.</param>
+    </member>
+    <member name="P:Microsoft.SqlServer.Dts.Pipeline.BlobColumn.IsNull">
+      <summary>Gets a value that indicates whether the column is null.</summary>
+      <returns>A value that indicates whether the column is null.</returns>
+    </member>
+    <member name="P:Microsoft.SqlServer.Dts.Pipeline.BlobColumn.Length">
+      <summary>Gets the length of the contents of the column.</summary>
+      <returns>The length of the contents of the column.</returns>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.BlobColumn.ResetBlobData">
+      <summary>Deletes the contents of the column.</summary>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.BlobColumn.SetNull">
+      <summary>Sets the column value to null.</summary>
+    </member>
+    <member name="T:Microsoft.SqlServer.Dts.Pipeline.BufferColumn">
+      <summary>Provides read-only metadata for a <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> column.</summary>
+    </member>
+    <member name="F:Microsoft.SqlServer.Dts.Pipeline.BufferColumn.CodePage">
+      <summary>Specifies the code page for <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> columns that contain text data types.</summary>
+    </member>
+    <member name="F:Microsoft.SqlServer.Dts.Pipeline.BufferColumn.DataType">
+      <summary>Specifies the <see cref="T:Microsoft.SqlServer.Dts.Runtime.Wrapper.DataType" /> of the value stored in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> column.</summary>
+    </member>
+    <member name="F:Microsoft.SqlServer.Dts.Pipeline.BufferColumn.MaxLength">
+      <summary>Indicates the maximum number of characters or digits that will fit in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> column.</summary>
+    </member>
+    <member name="F:Microsoft.SqlServer.Dts.Pipeline.BufferColumn.Precision">
+      <summary>Specifies the total number of digits contained in a column that has a numeric data type <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" />.</summary>
+    </member>
+    <member name="F:Microsoft.SqlServer.Dts.Pipeline.BufferColumn.Scale">
+      <summary>Specifies the number of digits to the right of the decimal place for numeric data type <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> columns.</summary>
+    </member>
+    <member name="T:Microsoft.SqlServer.Dts.Pipeline.BufferDisconnectedException">
+      <summary>The exception that is thrown when an attempt to access a <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> object fails.</summary>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.BufferDisconnectedException.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.BufferDisconnectedException" /> class.</summary>
+    </member>
+    <member name="T:Microsoft.SqlServer.Dts.Pipeline.CannotCreatePipelineComponentException">
+      <summary>The exception that is thrown when the data flow cannot create an instance of a Script component. </summary>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.CannotCreatePipelineComponentException.#ctor(System.String)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.CannotCreatePipelineComponentException" /> class.</summary>
+      <param name="className">The value of the UserComponentTypeName property of the Script component.</param>
+    </member>
+    <member name="T:Microsoft.SqlServer.Dts.Pipeline.ColumnIndexOutOfRangeException">
+      <summary>The exception that is thrown when an attempt to access a buffer column by using an index is outside the bounds of the collection of buffer columns.</summary>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.ColumnIndexOutOfRangeException.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.ColumnIndexOutOfRangeException" /> class.</summary>
+    </member>
+    <member name="T:Microsoft.SqlServer.Dts.Pipeline.ColumnIsNullException">
+      <summary>The exception that is thrown when using a specific data type column access method and the column value is null.</summary>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.ColumnIsNullException.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.ColumnIsNullException" /> class.</summary>
+    </member>
+    <member name="T:Microsoft.SqlServer.Dts.Pipeline.ComponentType">
+      <summary>Specifies the three types of data flow components.</summary>
+    </member>
+    <member name="F:Microsoft.SqlServer.Dts.Pipeline.ComponentType.DestinationAdapter">
+      <summary>Identifies a component as a destination, which has one or more <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSInput100" /> objects and no <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutput100" /> objects.</summary>
+    </member>
+    <member name="F:Microsoft.SqlServer.Dts.Pipeline.ComponentType.SourceAdapter">
+      <summary>Identifies a component as a source, which has one or more <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutput100" /> objects and no <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSInput100" /> objects.</summary>
+    </member>
+    <member name="F:Microsoft.SqlServer.Dts.Pipeline.ComponentType.Transform">
+      <summary>Identifies a component as a transformation, which has both one or more <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSInput100" /> objects and one or more <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutput100" /> objects.</summary>
+    </member>
+    <member name="T:Microsoft.SqlServer.Dts.Pipeline.ComponentUpgradeFailedException">
+      <summary>The exception that is thrown when the <see cref="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.PerformUpgrade(System.Int32)" /> method of a component fails.</summary>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.ComponentUpgradeFailedException.#ctor(System.String)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.ComponentUpgradeFailedException" /> class with the <see cref="P:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSComponentMetaData100.IdentificationString" /> of the component that failed to upgrade.</summary>
+      <param name="strComponentName">The <see cref="P:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSComponentMetaData100.IdentificationString" /> of the component.</param>
+    </member>
+    <member name="T:Microsoft.SqlServer.Dts.Pipeline.ComponentVersionMismatchException">
+      <summary>The exception that is thrown when the component version stored in the package XML is higher than the version of the component installed on the current computer.</summary>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.ComponentVersionMismatchException.#ctor(System.String)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.ComponentVersionMismatchException" /> class with the <see cref="P:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSComponentMetaData100.IdentificationString" /> of the mismatched component.</summary>
+      <param name="componentName">The <see cref="P:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSComponentMetaData100.IdentificationString" /> of the component.</param>
+    </member>
+    <member name="T:Microsoft.SqlServer.Dts.Pipeline.DoesNotFitBufferException">
+      <summary>The exception that is thrown when a value that is too large to fit in the data area of a <see cref="T:Microsoft.SqlServer.Dts.Pipeline.BufferColumn" /> is written to the buffer.</summary>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.DoesNotFitBufferException.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.DoesNotFitBufferException" /> class.</summary>
+    </member>
+    <member name="T:Microsoft.SqlServer.Dts.Pipeline.DtsPipelineComponentAttribute">
+      <summary>Contains design-time information about a <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent" /> object.</summary>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.DtsPipelineComponentAttribute.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.DtsPipelineComponentAttribute" /> class.</summary>
+    </member>
+    <member name="P:Microsoft.SqlServer.Dts.Pipeline.DtsPipelineComponentAttribute.ComponentType">
+      <summary>Identifies a component as a source, destination, or transformation.</summary>
+      <returns>A value from the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.ComponentType" /> enumeration.</returns>
+    </member>
+    <member name="P:Microsoft.SqlServer.Dts.Pipeline.DtsPipelineComponentAttribute.CurrentVersion">
+      <summary>Gets or sets the version of the component.</summary>
+      <returns>An integer that contains the version of the component.</returns>
+    </member>
+    <member name="P:Microsoft.SqlServer.Dts.Pipeline.DtsPipelineComponentAttribute.HelpCollection">
+      <summary>Gets or sets the help collection from which to retrieve the help.</summary>
+      <returns>The Help collection.</returns>
+    </member>
+    <member name="P:Microsoft.SqlServer.Dts.Pipeline.DtsPipelineComponentAttribute.HelpKeyword">
+      <summary>Gets or sets the help keyword associated with the component.</summary>
+      <returns>The help keyword.</returns>
+    </member>
+    <member name="P:Microsoft.SqlServer.Dts.Pipeline.DtsPipelineComponentAttribute.IconResource">
+      <summary>Gets or sets the icon used to represent the component in the toolbox.</summary>
+      <returns>A string that identifies the icon resource used to represent the component in the toolbox.</returns>
+    </member>
+    <member name="P:Microsoft.SqlServer.Dts.Pipeline.DtsPipelineComponentAttribute.NoEditor">
+      <summary>Gets or sets a value indicating whether the Advanced Properties editor is available for the component.</summary>
+      <returns>true if the Advanced Properties editor is disabled; otherwise, false. The default is false.</returns>
+    </member>
+    <member name="P:Microsoft.SqlServer.Dts.Pipeline.DtsPipelineComponentAttribute.RequiredProductLevel">
+      <summary>Gets or sets a value indicating the required SQL Server 2005 product level for the data flow component.</summary>
+      <returns>One of the <see cref="T:Microsoft.SqlServer.Dts.Runtime.DTSProductLevel" /> values.</returns>
+    </member>
+    <member name="P:Microsoft.SqlServer.Dts.Pipeline.DtsPipelineComponentAttribute.SamplesTag">
+      <summary>Gets or sets the samples tag from the component.</summary>
+      <returns>The samples tag.</returns>
+    </member>
+    <member name="P:Microsoft.SqlServer.Dts.Pipeline.DtsPipelineComponentAttribute.ShapeProgID">
+      <summary>Gets or sets the designer shape of the component.</summary>
+      <returns>The PROGID of the object that implements the shape for the component.</returns>
+    </member>
+    <member name="P:Microsoft.SqlServer.Dts.Pipeline.DtsPipelineComponentAttribute.SupportsBackPressure">
+      <summary>Identifies the component as one that supports more than one input, and implements the optional methods for handling excessive memory usage if the inputs produce data at uneven rates.</summary>
+      <returns>true if the component supports more than one input and implements the optional methods for handling excessive memory usage if the inputs produce data at uneven rates; otherwise, false.</returns>
+    </member>
+    <member name="P:Microsoft.SqlServer.Dts.Pipeline.DtsPipelineComponentAttribute.UITypeName">
+      <summary>Gets or sets the qualified name of the assembly implementing the user interface of the component.</summary>
+      <returns>The fully qualified name of the type implementing the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Design.IDtsComponentUI" /> interface.</returns>
+    </member>
+    <member name="T:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost">
+      <summary>Represents the host for the DTS managed component.</summary>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost" /> class.</summary>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost.GetSupport(System.Boolean@)">
+      <summary>Gets the support for the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost" />.</summary>
+      <param name="pSupport">The support.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost.HostAcquireConnections(Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSManagedComponentWrapper100,System.Object)">
+      <summary>Acquires connection for the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost" />.</summary>
+      <param name="wrapper">The wrapper.</param>
+      <param name="transaction">The transaction.</param>
+    </member>
+    <member name="P:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost.HostBufferManager">
+      <summary>Sets the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost" /> buffer manager.</summary>
+      <returns>The buffer manager.</returns>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost.HostCanProcess(Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSManagedComponentWrapper100,System.Int32,System.Int32[],System.Boolean[]@)">
+      <summary>Specifies whether the managed component host can process.</summary>
+      <param name="wrapper">The wrapper.</param>
+      <param name="inputCount">The input count.</param>
+      <param name="inputIDs">The input identifier.</param>
+      <param name="canProcess">True if the managed component host can process; otherwise, false.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost.HostCheckAndPerformUpgrade(Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSManagedComponentWrapper100,System.Int32)">
+      <summary>Checks the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost" /> and performs an upgrade.</summary>
+      <param name="wrapper">The component wrapper.</param>
+      <param name="lPipelineVersion">The pipeline version.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost.HostCleanup(Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSManagedComponentWrapper100)">
+      <summary>Performs a host cleanup.</summary>
+      <param name="wrapper">The component wrapper.</param>
+    </member>
+    <member name="P:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost.HostComponentMetaData">
+      <summary>Sets the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost" /> component metadata.</summary>
+      <returns>The component metadata.</returns>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost.HostDeleteExternalMetadataColumn(Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSManagedComponentWrapper100,System.Int32,System.Int32)">
+      <summary>Deletes an external metadata column of the host.</summary>
+      <param name="wrapper">The component wrapper.</param>
+      <param name="iID">The identifier.</param>
+      <param name="iExternalMetadataColumnID">The external metadata column identifier.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost.HostDeleteInput(Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSManagedComponentWrapper100,System.Int32)">
+      <summary>Deletes the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost" /> input.</summary>
+      <param name="wrapper">The component wrapper.</param>
+      <param name="inputID">The input identifier.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost.HostDeleteOutput(Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSManagedComponentWrapper100,System.Int32)">
+      <summary>Deletes the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost" /> output.</summary>
+      <param name="wrapper">The component wrapper.</param>
+      <param name="outputID">The output identifier.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost.HostDeleteOutputColumn(Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSManagedComponentWrapper100,System.Int32,System.Int32)">
+      <summary>Deletes the component host output column.</summary>
+      <param name="wrapper">The component wrapper.</param>
+      <param name="outputID">The output identifier.</param>
+      <param name="outputColumnID">The output column identifier.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost.HostDescribeRedirectedErrorCode(Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSManagedComponentWrapper100,System.Int32)">
+      <summary>Describes the redirected error code.</summary>
+      <returns>The described error code.</returns>
+      <param name="wrapper">The component wrapper.</param>
+      <param name="iErrorCode">The error code.</param>
+    </member>
+    <member name="P:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost.HostEventInfos">
+      <summary>Sets the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost" /> event information.</summary>
+      <returns>The event information.</returns>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost.HostGetDependencies(Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSManagedComponentWrapper100,System.Int32,System.Int32@,System.Int32[]@)">
+      <summary>Gets the component host dependencies.</summary>
+      <param name="wrapper">The component wrapper.</param>
+      <param name="blockedInputID">The blocked input identifier.</param>
+      <param name="dependencyCount">The dependency count.</param>
+      <param name="dependentInputIDs">The dependent input identifier.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost.HostInsertExternalMetadataColumnAt(Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSManagedComponentWrapper100,System.Int32,System.Int32,System.String,System.String)">
+      <summary>Inserts an external metadata at specified column.</summary>
+      <returns>The inserted external metadata.</returns>
+      <param name="wrapper">The component wrapper.</param>
+      <param name="iID">The identifier.</param>
+      <param name="iExternalMetadataColumnIndex">The external metadata column index.</param>
+      <param name="strName">The name.</param>
+      <param name="strDescription">The description.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost.HostInsertInput(Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSManagedComponentWrapper100,Microsoft.SqlServer.Dts.Pipeline.Wrapper.DTSInsertPlacement,System.Int32)">
+      <summary>Inserts a component host input.</summary>
+      <returns>The inserted input.</returns>
+      <param name="wrapper">The component wrapper.</param>
+      <param name="insertPlacement">The insert placement.</param>
+      <param name="inputID">The input identifier.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost.HostInsertOutput(Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSManagedComponentWrapper100,Microsoft.SqlServer.Dts.Pipeline.Wrapper.DTSInsertPlacement,System.Int32)">
+      <summary>Inserts a component host output.</summary>
+      <returns>The inserted component host output.</returns>
+      <param name="wrapper">The component wrapper.</param>
+      <param name="insertPlacement">The insert placement.</param>
+      <param name="outputID">The output identifier.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost.HostInsertOutputColumnAt(Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSManagedComponentWrapper100,System.Int32,System.Int32,System.String,System.String)">
+      <summary>Inserts an output column at the component host.</summary>
+      <returns>The inserted output column.</returns>
+      <param name="wrapper">The component wrapper.</param>
+      <param name="lOutputID">The output identifier.</param>
+      <param name="lOutputColumnIndex">The output column index.</param>
+      <param name="bstrName">The name.</param>
+      <param name="bstrDescription">The description.</param>
+    </member>
+    <member name="P:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost.HostLogEntryInfos">
+      <summary>Sets the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost" /> log entry information.</summary>
+      <returns>The log entry information.</returns>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost.HostMapInputColumn(Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSManagedComponentWrapper100,System.Int32,System.Int32,System.Int32)">
+      <summary>Locates the input for the column of the host.</summary>
+      <returns>The input for the column of the host map.</returns>
+      <param name="wrapper">The component wrapper.</param>
+      <param name="iInputID">The input identifier.</param>
+      <param name="iInputColumnID">The input column identifier.</param>
+      <param name="iExternalMetadataColumnID">The external metadata column identifier.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost.HostMapOutputColumn(Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSManagedComponentWrapper100,System.Int32,System.Int32,System.Int32,System.Boolean)">
+      <summary>Locates the output for the column of the host.</summary>
+      <returns>The output for the column of the host map.</returns>
+      <param name="wrapper">The component wrapper.</param>
+      <param name="iOutputID">The output identifier.</param>
+      <param name="iOutputColumnID">The output column identifier.</param>
+      <param name="iExternalMetadataColumnID">The external metadata column identifier.</param>
+      <param name="bMatch">The match.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost.HostOnDeletingInputColumn(Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSManagedComponentWrapper100,System.Int32,System.Int32)">
+      <summary>Specifies the host on deleting the input column.</summary>
+      <param name="wrapper">The component wrapper.</param>
+      <param name="inputID">The input identifier.</param>
+      <param name="inputColumnID">The input column identifier.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost.HostOnInputPathAttached(Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSManagedComponentWrapper100,System.Int32)">
+      <summary>Specifies the host on attached input path.</summary>
+      <param name="wrapper">The component wrapper.</param>
+      <param name="inputID">The input identifier.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost.HostOnInputPathDetached(Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSManagedComponentWrapper100,System.Int32)">
+      <summary>Specifies the host on detached input path.</summary>
+      <param name="wrapper">The component wrapper.</param>
+      <param name="inputID">The input identifier.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost.HostOnOutputPathAttached(Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSManagedComponentWrapper100,System.Int32)">
+      <summary>Specifies the host on attached output path.</summary>
+      <param name="wrapper">The component wrapper.</param>
+      <param name="outputID">The output identifier.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost.HostPostExecute(Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSManagedComponentWrapper100)">
+      <summary>Specifies the event after the host is executed.</summary>
+      <param name="wrapper">The component wrapper.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost.HostPreExecute(Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSManagedComponentWrapper100)">
+      <summary>Specifies the event before the host is executed.</summary>
+      <param name="wrapper">The component wrapper.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost.HostPrepareForExecute(Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSManagedComponentWrapper100)">
+      <summary>Prepares the host for execution.</summary>
+      <param name="wrapper">The component wrapper.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost.HostPrimeOutput(Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSManagedComponentWrapper100,System.Int32,System.Int32[],Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSBuffer100[],System.IntPtr)">
+      <summary>Specifies the host prime output.</summary>
+      <param name="wrapper">The component wrapper.</param>
+      <param name="outputs">The outputs.</param>
+      <param name="outputIDs">The output identifier.</param>
+      <param name="buffers">The buffers.</param>
+      <param name="ppBufferWirePacket">The buffer wire packet.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost.HostProcessInput(Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSManagedComponentWrapper100,System.Int32,Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSBuffer100,System.IntPtr)">
+      <summary>Specifies the host process input.</summary>
+      <param name="wrapper">The component wrapper.</param>
+      <param name="inputID">The input identifier.</param>
+      <param name="pDTSBuffer">The buffer.</param>
+      <param name="bufferWirePacket">The wire packet.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost.HostProvideComponentProperties(Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSManagedComponentWrapper100)">
+      <summary>Specifies the host provide component properties.</summary>
+      <param name="wrapper">The component wrapper.</param>
+    </member>
+    <member name="P:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost.HostReferenceTracker">
+      <summary>Sets the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost" /> reference tracker.</summary>
+      <returns>The reference tracker.</returns>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost.HostReinitializeMetaData(Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSManagedComponentWrapper100)">
+      <summary>Specifies the metadata for re-initialization of the host.</summary>
+      <param name="wrapper">The component wrapper.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost.HostReleaseConnections(Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSManagedComponentWrapper100)">
+      <summary>Releases the host connection.</summary>
+      <param name="wrapper">The component wrapper.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost.HostSetComponentProperty(Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSManagedComponentWrapper100,System.String,System.Object)">
+      <summary>Sets the host component property.</summary>
+      <returns>The host component property.</returns>
+      <param name="wrapper">The component wrapper.</param>
+      <param name="propertyName">The property name.</param>
+      <param name="propertyValue">The property value.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost.HostSetExternalMetadataColumnDataTypeProperties(Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSManagedComponentWrapper100,System.Int32,System.Int32,Microsoft.SqlServer.Dts.Runtime.Wrapper.DataType,System.Int32,System.Int32,System.Int32,System.Int32)">
+      <summary>Sets the external metadata column data type property of the host.</summary>
+      <param name="wrapper">The component wrapper.</param>
+      <param name="iID">The identifier.</param>
+      <param name="iExternalMetadataColumnID">The external metadata column identifier.</param>
+      <param name="eDataType">The data type.</param>
+      <param name="iLength">The length.</param>
+      <param name="iPrecision">The precision.</param>
+      <param name="iScale">The scale.</param>
+      <param name="iCodePage">The code page.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost.HostSetExternalMetadataColumnProperty(Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSManagedComponentWrapper100,System.Int32,System.Int32,System.String,System.Object)">
+      <summary>Sets the external metadata column property of the host.</summary>
+      <returns>The external metadata column property.</returns>
+      <param name="wrapper">The component wrapper.</param>
+      <param name="iID">The identifier.</param>
+      <param name="iExternalMetadataColumnID">The external metadata column identifier.</param>
+      <param name="strPropertyName">The property name.</param>
+      <param name="oValue">The value.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost.HostSetInputColumnProperty(Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSManagedComponentWrapper100,System.Int32,System.Int32,System.String,System.Object)">
+      <summary>Sets the input column property of the host.</summary>
+      <returns>The input column property of the host.</returns>
+      <param name="wrapper">The component wrapper.</param>
+      <param name="inputID">The input Identifier.</param>
+      <param name="inputColumnID">The input column identifier.</param>
+      <param name="propertyName">The property name.</param>
+      <param name="propertyValue">The property value.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost.HostSetInputProperty(Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSManagedComponentWrapper100,System.Int32,System.String,System.Object)">
+      <summary>Sets the input property of the host.</summary>
+      <returns>The input property of the host.</returns>
+      <param name="wrapper">The component wrapper.</param>
+      <param name="inputID">The input identifier.</param>
+      <param name="propertyName">The property name.</param>
+      <param name="propertyValue">The property value.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost.HostSetOutputColumnDataTypeProperties(Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSManagedComponentWrapper100,System.Int32,System.Int32,Microsoft.SqlServer.Dts.Runtime.Wrapper.DataType,System.Int32,System.Int32,System.Int32,System.Int32)">
+      <summary>Sets the output column data type property of the host.</summary>
+      <param name="wrapper">The component wrapper.</param>
+      <param name="iOutputID">The output identifier.</param>
+      <param name="iOutputColumnID">The output column identifier.</param>
+      <param name="eDataType">The data type.</param>
+      <param name="iLength">The length.</param>
+      <param name="iPrecision">The precision.</param>
+      <param name="iScale">The scale.</param>
+      <param name="iCodePage">The code page.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost.HostSetOutputColumnProperty(Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSManagedComponentWrapper100,System.Int32,System.Int32,System.String,System.Object)">
+      <summary>Sets the output column property of the host.</summary>
+      <returns>The output column property of the host.</returns>
+      <param name="wrapper">The component wrapper.</param>
+      <param name="outputID">The output identifier.</param>
+      <param name="outputColumnID">The output column identifier.</param>
+      <param name="propertyName">The name of the property.</param>
+      <param name="propertyValue">The value of the property.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost.HostSetOutputProperty(Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSManagedComponentWrapper100,System.Int32,System.String,System.Object)">
+      <summary>Sets the output property of the host.</summary>
+      <returns>The output property of the host.</returns>
+      <param name="wrapper">The component wrapper.</param>
+      <param name="outputID">The output identifier.</param>
+      <param name="propertyName">The name of the property.</param>
+      <param name="propertyValue">The value of the property.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost.HostSetUsageType(Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSManagedComponentWrapper100,System.Int32,Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSVirtualInput100,System.Int32,Microsoft.SqlServer.Dts.Pipeline.Wrapper.DTSUsageType)">
+      <summary>Sets the usage type of the host.</summary>
+      <returns>The usage type of the host.</returns>
+      <param name="wrapper">The component wrapper.</param>
+      <param name="inputID">The input identifier.</param>
+      <param name="virtualInput">The virtual input.</param>
+      <param name="lineageID">The lineage identifier.</param>
+      <param name="usageType">The usage type.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost.HostValidate(Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSManagedComponentWrapper100)">
+      <summary>Validates the host.</summary>
+      <returns>The validate host.</returns>
+      <param name="wrapper">The component wrapper.</param>
+    </member>
+    <member name="P:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost.HostVariableDispenser">
+      <summary>Sets the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost" /> variable dispenser.</summary>
+      <returns>The variable dispenser.</returns>
+    </member>
+    <member name="P:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost.InnerObject">
+      <summary>Gets the inner object.</summary>
+      <returns>The inner object.</returns>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.ManagedComponentHost.Instantiate(System.String,Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSComponentMetaData100,Microsoft.SqlServer.Dts.Runtime.Wrapper.IDTSVariableDispenser100,Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSBufferManager100,Microsoft.SqlServer.Dts.Runtime.Wrapper.IDTSEventInfos100,Microsoft.SqlServer.Dts.Runtime.Wrapper.IDTSObjectReferenceTracker100,Microsoft.SqlServer.Dts.Runtime.Wrapper.IDTSLogEntryInfos100,Microsoft.SqlServer.Dts.Runtime.Wrapper.DTSProductLevel@)">
+      <summary>Instantiates the host.</summary>
+      <param name="userComponentTypeName">The type name of the component.</param>
+      <param name="componentMetaData">The component metadata.</param>
+      <param name="variableDispenser">The variable dispenser.</param>
+      <param name="bufferManager">The buffer manager.</param>
+      <param name="eventInfos">The event information.</param>
+      <param name="refTracker">The reference tracker.</param>
+      <param name="logEntryInfos">The log entry information.</param>
+      <param name="productLevel">The product level.</param>
+    </member>
+    <member name="T:Microsoft.SqlServer.Dts.Pipeline.NoCurrentRowException">
+      <summary>The exception that is thrown when the address of the beginning of a <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> row is null.</summary>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.NoCurrentRowException.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.NoCurrentRowException" /> class.</summary>
+    </member>
+    <member name="T:Microsoft.SqlServer.Dts.Pipeline.NotOutputBufferException">
+      <summary>The exception that is thrown when a method that is restricted to <see cref="F:Microsoft.SqlServer.Dts.Pipeline.PipelineBufferMode.Output" /> objects is called on an <see cref="F:Microsoft.SqlServer.Dts.Pipeline.PipelineBufferMode.Input" /><see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" />.</summary>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.NotOutputBufferException.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.NotOutputBufferException" /> class.</summary>
+    </member>
+    <member name="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer">
+      <summary>Provides an in-memory data store containing rows and columns of data.</summary>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.#ctor(System.IntPtr,Microsoft.SqlServer.Dts.Pipeline.PipelineBufferMode)">
+      <summary>Instantiates a new instance of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" />.</summary>
+      <param name="bufferWirePacket">The bufferWirePacket.</param>
+      <param name="bufferMode">Specifies the mode of the newly created <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" />.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.AddBlobData(System.Int32,System.Byte[])">
+      <summary>Adds an array of bytes to a <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> column.</summary>
+      <param name="columnIndex">The index of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> column to which the array of bytes will be appended.</param>
+      <param name="data">The array of bytes that is appended to the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> object.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.AddBlobData(System.Int32,System.Byte[],System.Int32)">
+      <summary>Adds an array of a specified number of bytes to a <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> column.</summary>
+      <param name="columnIndex">The index of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> column to which the array of bytes will be appended.</param>
+      <param name="data">The array of bytes that is appended to the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> object.</param>
+      <param name="count">The number of bytes of data to be appended.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.AddRow">
+      <summary>Adds a row to the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> object.</summary>
+    </member>
+    <member name="P:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.ColumnCount">
+      <summary>Gets the number of columns in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" />.</summary>
+      <returns>The number of columns in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" />.</returns>
+    </member>
+    <member name="P:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.CurrentRow">
+      <summary>Gets the index of the current row in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" />.</summary>
+      <returns>The index of the current row in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" />.</returns>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.DirectErrorRow(System.Int32,System.Int32,System.Int32)">
+      <summary>Sends a <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> row to an <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutput100" /> whose <see cref="P:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutput100.IsErrorOut" /> property is true.</summary>
+      <param name="outputID">The ID of the error <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutput100" /> to send the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> row.</param>
+      <param name="errorCode">The error number that occurred while processing the row.</param>
+      <param name="errorColumn">The ID of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> column that caused the error.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.DirectErrorRow(System.Int32,System.Int32,System.Int32,System.Int32)">
+      <summary>Sends a <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> row to an <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutput100" /> whose <see cref="P:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutput100.IsErrorOut" /> property is true.</summary>
+      <param name="row">The index of the row to be directed to the error output.</param>
+      <param name="outputID">The ID of the error <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutput100" /> to send the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> row.</param>
+      <param name="errorCode">The error number that occurred while processing the row.</param>
+      <param name="errorColumn">The ID of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> column that caused the error.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.DirectRow(System.Int32)">
+      <summary>Sends a row from a <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> to the specified <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutput100" />.</summary>
+      <param name="outputID">The ID of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutput100" /> where the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> row is sent.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.Dispose">
+      <summary>Releases all resources used by the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" />.</summary>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.Dispose(System.Boolean)">
+      <summary>Releases the unmanaged resources that are used by the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" />, and optionally releases the managed resources.</summary>
+      <param name="disposing">A Boolean that specifies whether both managed and unmanaged resources are released. true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+    </member>
+    <member name="P:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.EndOfRowset">
+      <summary>Gets a value indicating whether the current <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> is the final buffer.</summary>
+      <returns>true if the current <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> is the final buffer from the upstream component; otherwise, false. </returns>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.Finalize">
+      <summary>Releases all resources used by the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" />.</summary>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.GetBlobData(System.Int32,System.Int32,System.Int32)">
+      <summary>Retrieves an array of bytes from a binary large object (BLOB) stored in a <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> column.</summary>
+      <returns>The array of bytes in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> column.</returns>
+      <param name="columnIndex">The index of the column containing the BLOB.</param>
+      <param name="offset">The point in the BLOB to begin retrieving bytes from the BLOB.</param>
+      <param name="count">The number of bytes to retrieve from the BLOB.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.GetBlobLength(System.Int32)">
+      <summary>Gets the number of bytes contained in a binary large object (BLOB) <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> column.</summary>
+      <returns>The number of bytes in the binary large object.</returns>
+      <param name="columnIndex">The index of the column containing the BLOB.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.GetBoolean(System.Int32)">
+      <summary>Gets the bool value stored in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> column.</summary>
+      <returns>The bool value stored in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> column.</returns>
+      <param name="columnIndex">The index of the column in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> row.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.GetByte(System.Int32)">
+      <summary>Gets the byte value stored in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> column.</summary>
+      <returns>The byte value stored in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> column.</returns>
+      <param name="columnIndex">The index of the column in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> row.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.GetBytes(System.Int32)">
+      <summary>Gets the array of bytes stored in a buffer column.</summary>
+      <returns>The array of bytes stored in the buffer column.</returns>
+      <param name="columnIndex">The index of the column.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.GetColumnInfo(System.Int32)">
+      <summary>Retrieves the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.BufferColumn" /> structure for a <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> column.</summary>
+      <returns>The <see cref="T:Microsoft.SqlServer.Dts.Pipeline.BufferColumn" /> structure of the specified <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> column.</returns>
+      <param name="columnIndex">The index of the column whose <see cref="T:Microsoft.SqlServer.Dts.Pipeline.BufferColumn" /> structure is retrieved.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.GetDate(System.Int32)">
+      <summary>Gets the DateTime value stored in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> column.</summary>
+      <returns>The DateTime value stored in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> column.</returns>
+      <param name="columnIndex">The index of the column in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> row.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.GetDateTime(System.Int32)">
+      <summary>Gets the DateTime value stored in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> column.</summary>
+      <returns>The DateTime value stored in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> column.</returns>
+      <param name="columnIndex">The index of the column in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> row.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.GetDateTimeOffset(System.Int32)">
+      <summary>Gets the DateTimeOffset value stored in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> column.</summary>
+      <returns>The DateTimeOffset value stored in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> column.</returns>
+      <param name="columnIndex">The index of the column in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> row.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.GetDecimal(System.Int32)">
+      <summary>Gets the decimal value stored in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> column.</summary>
+      <returns>The decimal value stored in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> row.</returns>
+      <param name="columnIndex">The index of the column in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> row.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.GetDouble(System.Int32)">
+      <summary>Gets the double stored in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> column.</summary>
+      <returns>The double stored in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> column.</returns>
+      <param name="columnIndex">The index of the column in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> row.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.GetGuid(System.Int32)">
+      <summary>Gets the Guid value stored in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> column.</summary>
+      <returns>The Guid value stored in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> column.</returns>
+      <param name="columnIndex">The index of the column in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> row.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.GetInt16(System.Int32)">
+      <summary>Gets the short stored in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> column.</summary>
+      <returns>The short stored in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> column.</returns>
+      <param name="columnIndex">The index of the column in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> row.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.GetInt32(System.Int32)">
+      <summary>Gets the int stored in a <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> column.</summary>
+      <returns>The int stored in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> column.</returns>
+      <param name="columnIndex">The index of the column in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> row.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.GetInt64(System.Int32)">
+      <summary>Gets the long stored in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> column.</summary>
+      <returns>The long stored in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> column.</returns>
+      <param name="columnIndex">The index of the column in the buffer row.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.GetSByte(System.Int32)">
+      <summary>Gets the SByte value stored in a <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> column.</summary>
+      <returns>The sbyte stored in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> column.</returns>
+      <param name="columnIndex">The index of the column in the buffer row.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.GetSingle(System.Int32)">
+      <summary>Gets the float stored in a <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> column.</summary>
+      <returns>The float contained in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> column.</returns>
+      <param name="columnIndex">The index of the column in the buffer row.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.GetString(System.Int32)">
+      <summary>Gets the string stored in the buffer column.</summary>
+      <returns>The string stored in the buffer column.</returns>
+      <param name="columnIndex">The index of the column in the buffer row.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.GetTime(System.Int32)">
+      <summary>Gets the TimeSpan value stored in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> column.</summary>
+      <returns>The TimeSpan value stored in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> column.</returns>
+      <param name="columnIndex">The index of the column in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> row.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.GetUInt16(System.Int32)">
+      <summary>Gets the ushort value stored in the buffer column.</summary>
+      <returns>The ushort stored in the buffer column.</returns>
+      <param name="columnIndex">The index of the column in the buffer row.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.GetUInt32(System.Int32)">
+      <summary>Gets the UInt32 value stored in the buffer column.</summary>
+      <returns>The UInt32 value stored in the buffer column.</returns>
+      <param name="columnIndex">The index of the column in the buffer row.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.GetUInt64(System.Int32)">
+      <summary>Gets the ulong value stored in the buffer column.</summary>
+      <returns>The ulong value stored in the buffer column.</returns>
+      <param name="columnIndex">The index of the column in the buffer row.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.IsNull(System.Int32)">
+      <summary>Checks to see if the data in a buffer column is null.</summary>
+      <returns>true if the column contains null; otherwise, false.</returns>
+      <param name="columnIndex">The index of the column in the buffer row.</param>
+    </member>
+    <member name="P:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.Item(System.Int32)">
+      <summary>Gets the data stored in a buffer column.</summary>
+      <returns>The data stored in the buffer column as an object.</returns>
+      <param name="columnIndex">The index of the column in the buffer row.</param>
+    </member>
+    <member name="P:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.Mode">
+      <summary>Gets a value indicating whether a <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> is an <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSInput100" /> buffer or an <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutput100" /> buffer.</summary>
+      <returns>A value from the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBufferMode" /> enumeration that indicates whether the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> is in <see cref="F:Microsoft.SqlServer.Dts.Pipeline.PipelineBufferMode.Output" /> mode or <see cref="F:Microsoft.SqlServer.Dts.Pipeline.PipelineBufferMode.Input" /> mode.</returns>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.NextRow">
+      <summary>Advances the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> to the next row.</summary>
+      <returns>true if the buffer was advanced to the next row; otherwise, false.</returns>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.RemoveRow">
+      <summary>Removes the current row from the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" />.</summary>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.ResetBlobData(System.Int32)">
+      <summary>Deletes the contents of the specified BLOB column.</summary>
+      <param name="columnIndex">The index of the column from which to delete existing BLOB data.</param>
+    </member>
+    <member name="P:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.RowCount">
+      <summary>Gets the number of rows in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> object.</summary>
+      <returns>The number of rows in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" />.</returns>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.SetBoolean(System.Int32,System.Boolean)">
+      <summary>Assigns a bool value to a <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> column.</summary>
+      <param name="columnIndex">The index of the column in the buffer row.</param>
+      <param name="value">The value assigned to the buffer column.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.SetByte(System.Int32,System.Byte)">
+      <summary>Assigns a byte to a <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> column.</summary>
+      <param name="columnIndex">The index of the column in the buffer row.</param>
+      <param name="value">The value assigned to the buffer column.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.SetBytes(System.Int32,System.Byte[])">
+      <summary>Assigns an array of bytes to a buffer column.</summary>
+      <param name="columnIndex">The index of the buffer column.</param>
+      <param name="bytesValue">The array of bytes to assign to the column.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.SetDate(System.Int32,System.DateTime)">
+      <summary>Assigns a DateTime value to the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> column.</summary>
+      <param name="columnIndex">The index of the column in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> row.</param>
+      <param name="value">The value assigned to the buffer column.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.SetDateTime(System.Int32,System.DateTime)">
+      <summary>Assigns a DateTime value to the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> column.</summary>
+      <param name="columnIndex">The index of the column in the buffer row.</param>
+      <param name="value">The value assigned to the buffer column.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.SetDateTimeOffset(System.Int32,System.DateTimeOffset)">
+      <summary>Assigns a DateTimeOffset value to the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> column.</summary>
+      <param name="columnIndex">The index of the column in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> row.</param>
+      <param name="value">The value assigned to the buffer column.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.SetDecimal(System.Int32,System.Decimal)">
+      <summary>Assigns a decimal to a buffer column.</summary>
+      <param name="columnIndex">The index of the column in the buffer row.</param>
+      <param name="value">The value assigned to the buffer column.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.SetDouble(System.Int32,System.Double)">
+      <summary>Assigns a double to a <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> column.</summary>
+      <param name="columnIndex">The index of the column in the buffer row.</param>
+      <param name="value">The value assigned to the buffer column.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.SetEndOfRowset">
+      <summary>Notifies the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> that a component has finished adding rows to the buffer.</summary>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.SetErrorInfo(System.Int32,System.Int32,System.Int32)">
+      <summary>Sets the error information for the current <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> row.</summary>
+      <param name="OutputID">The ID of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutput100" /> object in which the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> error occurred.</param>
+      <param name="ErrorCode">The error number that occurred.</param>
+      <param name="ErrorColumn">The ID of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> column where the error occurred.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.SetGuid(System.Int32,System.Guid)">
+      <summary>Assigns a Guid to a buffer column.</summary>
+      <param name="columnIndex">The index of the buffer column.</param>
+      <param name="value">The Guid to assign to the column.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.SetInt16(System.Int32,System.Int16)">
+      <summary>Assigns a 16-bit signed integer to a buffer column.</summary>
+      <param name="columnIndex">The index of the column in the buffer row.</param>
+      <param name="value">The value assigned to the buffer column.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.SetInt32(System.Int32,System.Int32)">
+      <summary>Assigns a 32-bit signed integer to a buffer column.</summary>
+      <param name="columnIndex">The index of the column in the buffer row.</param>
+      <param name="value">The value assigned to the buffer column.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.SetInt64(System.Int32,System.Int64)">
+      <summary>Assigns a 64-bit signed integer to a buffer column.</summary>
+      <param name="columnIndex">The index of the column in the buffer row.</param>
+      <param name="value">The value assigned to the buffer column.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.SetNull(System.Int32)">
+      <summary>Assigns null to a buffer column.</summary>
+      <param name="columnIndex">The index of the column in the buffer row.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.SetSByte(System.Int32,System.SByte)">
+      <summary>Assigns a signed 8-bit integer to a buffer column.</summary>
+      <param name="columnIndex">The index of the column in the buffer row.</param>
+      <param name="value">The value assigned to the buffer column.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.SetSingle(System.Int32,System.Single)">
+      <summary>Assigns a float to a buffer column.</summary>
+      <param name="columnIndex">The index of the column in the buffer row.</param>
+      <param name="value">The value assigned to the buffer column.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.SetString(System.Int32,System.String)">
+      <summary>Assigns a string to a buffer column.</summary>
+      <param name="columnIndex">The index of the column in the buffer row.</param>
+      <param name="value">The value assigned to the buffer column.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.SetTime(System.Int32,System.TimeSpan)">
+      <summary>Assigns a TimeSpan value to the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> column.</summary>
+      <param name="columnIndex">The index of the column in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> row.</param>
+      <param name="value">The value assigned to the buffer column.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.SetUInt16(System.Int32,System.UInt16)">
+      <summary>Assigns an unsigned 16-bit integer to a buffer column.</summary>
+      <param name="columnIndex">The index of the column in the buffer row.</param>
+      <param name="value">The value assigned to the buffer column.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.SetUInt32(System.Int32,System.UInt32)">
+      <summary>Assigns an unsigned 32-bit integer to a buffer column.</summary>
+      <param name="columnIndex">The index of the column in the buffer row.</param>
+      <param name="value">The value assigned to the buffer column.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer.SetUInt64(System.Int32,System.UInt64)">
+      <summary>Assigns an unsigned 64-bit integer to a buffer column.</summary>
+      <param name="columnIndex">The index of the column in the buffer row.</param>
+      <param name="value">The value assigned to the buffer column.</param>
+    </member>
+    <member name="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBufferMode">
+      <summary>Contains values used to identify a <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> as an input or output buffer.</summary>
+    </member>
+    <member name="F:Microsoft.SqlServer.Dts.Pipeline.PipelineBufferMode.Input">
+      <summary>Identifies a <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> as an input buffer.</summary>
+    </member>
+    <member name="F:Microsoft.SqlServer.Dts.Pipeline.PipelineBufferMode.Output">
+      <summary>Identifies a <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> as an output buffer.</summary>
+    </member>
+    <member name="T:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent">
+      <summary>Defines the base class that is used when developing managed data flow components.</summary>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent" /> class.</summary>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.AcquireConnections(System.Object)">
+      <summary>Establishes a connection to a connection manager.</summary>
+      <param name="transaction">The transaction the connection is participating in.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.AddErrorOutput(System.String,System.Int32,System.Int32)">
+      <summary>Adds an <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutput100" /> object and marks it as an error output by setting the <see cref="P:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutput100.IsErrorOut" /> property to true.</summary>
+      <param name="strOutputName">Specifies the name of the output.</param>
+      <param name="lInputID">Specifies the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSInput100" /> of the error output.</param>
+      <param name="lExclusionGroup">Specifies the exclusion group of the output.</param>
+    </member>
+    <member name="P:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.BufferManager">
+      <summary>Gets the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSBufferManager100" /> of the pipeline component.</summary>
+      <returns>The <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSBufferManager100" /> object.</returns>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.BufferTypeToDataRecordType(Microsoft.SqlServer.Dts.Runtime.Wrapper.DataType)">
+      <summary>Returns a managed data type based on an Integration Services data type.</summary>
+      <returns>The managed type that maps to an Integration Services <see cref="T:Microsoft.SqlServer.Dts.Runtime.Wrapper.DataType" />.</returns>
+      <param name="type">A value from the <see cref="T:Microsoft.SqlServer.Dts.Runtime.Wrapper.DataType" /> enumeration.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.Cleanup">
+      <summary>Frees resources and finishes the execution of the component.</summary>
+    </member>
+    <member name="P:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.ComponentMetaData">
+      <summary>Gets the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSComponentMetaData100" /> for a component.</summary>
+      <returns>The <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSComponentMetaData100" /> of the data flow component.</returns>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.ConvertBufferDataTypeToFitManaged(Microsoft.SqlServer.Dts.Runtime.Wrapper.DataType,System.Boolean@)">
+      <summary>Gets the appropriate Integration Services <see cref="T:Microsoft.SqlServer.Dts.Runtime.Wrapper.DataType" /> from managed code.</summary>
+      <returns>An Integration Services <see cref="T:Microsoft.SqlServer.Dts.Runtime.Wrapper.DataType" /> that corresponds to a managed type. </returns>
+      <param name="dt">The Integration Services  <see cref="T:Microsoft.SqlServer.Dts.Runtime.Wrapper.DataType" /></param>
+      <param name="IsLong">Indicates if the data type is a long.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.DataRecordTypeToBufferType(System.Type)">
+      <summary>Gets the Integration Services <see cref="T:Microsoft.SqlServer.Dts.Runtime.Wrapper.DataType" /> that corresponds to a managed type.</summary>
+      <returns>The Integration Services <see cref="T:Microsoft.SqlServer.Dts.Runtime.Wrapper.DataType" /> that corresponds to the managed type.</returns>
+      <param name="type">A managed type.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.DeleteExternalMetadataColumn(System.Int32,System.Int32)">
+      <summary>Deletes the external metadata column at the specified index from the collection of external metadata columns.</summary>
+      <param name="iID">The ID of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSInput100" /> or <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutput100" />  that the external metadata column is associated with.</param>
+      <param name="iExternalMetadataColumnID">The ID of the external metadata column.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.DeleteInput(System.Int32)">
+      <summary>Deletes an <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSInput100" /> object from the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSInputCollection100" /> collection.</summary>
+      <param name="inputID">The ID of the input object to delete.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.DeleteOutput(System.Int32)">
+      <summary>Deletes an <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutput100" /> object from the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutputCollection100" /> collection.</summary>
+      <param name="outputID">The ID of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutput100" /> object to delete.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.DeleteOutputColumn(System.Int32,System.Int32)">
+      <summary>Deletes an <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutputColumn100" /> object from the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutputColumnCollection100" /> collection.</summary>
+      <param name="outputID">The ID of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutput100" /> that contains the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutputColumn100" />.</param>
+      <param name="outputColumnID">The ID of the IDTSOutputColumn100 object to delete.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.DescribeRedirectedErrorCode(System.Int32)">
+      <summary>Provides error code information for a <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> row added to an output buffer.</summary>
+      <returns>The description associated with the error code.</returns>
+      <param name="iErrorCode">The error code that is described.</param>
+    </member>
+    <member name="P:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.ErrorSupport">
+      <summary>Returns an <see cref="T:Microsoft.SqlServer.Dts.ManagedMsg.ErrorSupport" /> object that lets the component raise errors, warnings, or other information events based on HRESULTs returned by Integration Services components written in native code.</summary>
+      <returns>A <see cref="T:Microsoft.SqlServer.Dts.ManagedMsg.ErrorSupport" /> object that lets the component raise errors, warnings, or other information events based on HRESULTs returned by Integration Services components written in native code.</returns>
+    </member>
+    <member name="P:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.EventInfos">
+      <summary>Gets the <see cref="T:Microsoft.SqlServer.Dts.Runtime.Wrapper.IDTSEventInfos100" /> collection of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent" /> object.</summary>
+      <returns>The <see cref="T:Microsoft.SqlServer.Dts.Runtime.Wrapper.IDTSEventInfos100" /> object provided to the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent" /> object.</returns>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.GetDependentInputs(System.Int32)">
+      <summary>Returns a collection of the input IDs of inputs that are waiting for more data, and thus are blocking the specified input.</summary>
+      <returns>A collection of the input IDs of inputs that are waiting for more data, and thus are blocking the input that is identified by the <paramref name="blockedInputID" /> parameter.</returns>
+      <param name="blockedInputID">The ID of an input that is blocked while other inputs are waiting for more data.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.GetErrorOutputInfo(System.Int32@,System.Int32@)">
+      <summary>Returns the index and ID of the error output of the component.</summary>
+      <returns>true if the component has an <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutput100" /> object with the <see cref="P:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutput100.IsErrorOut" /> property set to true; otherwise, false.</returns>
+      <param name="iErrorOutputID">Contains the ID of the error <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutput100" /> when the method returns.</param>
+      <param name="iErrorOutputIndex">Contains the index of the error <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutput100" /> when the method returns.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.idxOfBufferType(Microsoft.SqlServer.Dts.Runtime.Wrapper.DataType)">
+      <summary>Specifies the type of the buffer index.</summary>
+      <returns>The type of the buffer index.</returns>
+      <param name="type">The type.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.idxOfDataRecordType(System.Type)">
+      <summary>Specifies the type of the data record index.</summary>
+      <returns>The type of the data record index.</returns>
+      <param name="type">The type.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.Initialize">
+      <summary>When overridden in a derived class, initializes a new instance of a custom data flow component.</summary>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.InsertExternalMetadataColumnAt(System.Int32,System.Int32,System.String,System.String)">
+      <summary>Inserts a new external metadata column into the collection of external metadata columns at the specified index.</summary>
+      <returns>The newly created <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSExternalMetadataColumn100" />.</returns>
+      <param name="iID">The ID of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSInput100" /> or <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutput100" />  that the external metadata column is associated with.</param>
+      <param name="iExternalMetadataColumnIndex">The index at which the new external metadata column should be inserted into the collection.</param>
+      <param name="strName">The Name of the new external metadata column.</param>
+      <param name="strDescription">The Description of the new external metadata column.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.InsertInput(Microsoft.SqlServer.Dts.Pipeline.Wrapper.DTSInsertPlacement,System.Int32)">
+      <summary>Adds an <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSInput100" /> object to the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSInputCollection100" />.</summary>
+      <returns>The newly created <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSInput100" /> object.</returns>
+      <param name="insertPlacement">Specifies whether to insert the new <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSInput100" /> object before or after the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSInput100" /> object specified by <paramref name="inputID" />.</param>
+      <param name="inputID">Specifies an existing <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSInput100" /> object that the new <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSInput100" /> is inserted next to.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.InsertOutput(Microsoft.SqlServer.Dts.Pipeline.Wrapper.DTSInsertPlacement,System.Int32)">
+      <summary>Adds a new <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutput100" /> object </summary>
+      <returns>The newly created <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSInput100" /> object</returns>
+      <param name="insertPlacement">Specifies whether to insert the new <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutput100" /> object before or after the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutput100" /> object specified by <paramref name="outputID" />.</param>
+      <param name="outputID">Specifies an existing <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutput100" /> object that the new <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutput100" /> is inserted next to.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.InsertOutputColumnAt(System.Int32,System.Int32,System.String,System.String)">
+      <summary>Creates a new <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutputColumn100" /> object and inserts it into the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutputColumnCollection100" />.</summary>
+      <returns>The newly created <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutputColumn100" /> object.</returns>
+      <param name="outputID">Specifies the IDTSOutput100 object to add the column to.</param>
+      <param name="outputColumnIndex">Specifies the location in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutputColumnCollection100" /> to insert the new <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutputColumn100" />.</param>
+      <param name="name">Specifies the value assigned to the Name property of the new <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutputColumn100" />.</param>
+      <param name="description">Specifies the value assigned to the Description property of the new <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutputColumn100" />.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.IsCompatibleNumericTypes(Microsoft.SqlServer.Dts.Runtime.Wrapper.DataType,Microsoft.SqlServer.Dts.Runtime.Wrapper.DataType)">
+      <summary>Determines whether two numeric data types are compatible to support a conversion from one type to the other.</summary>
+      <returns>true if the numeric types are compatible, otherwise, false.</returns>
+      <param name="dataTypeInp">The numeric data type of the column to be converted.</param>
+      <param name="dataTypeExt">The numeric data type of the destination column.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.IsInputReady(System.Int32[],System.Boolean[]@)">
+      <summary>Determines which of the inputs attached to a component are waiting for more data, and which have enough data to process and are blocked.</summary>
+      <param name="inputIDs">An array of the IDs of the inputs attached to the component.</param>
+      <param name="canProcess">An array of Boolean values that indicate whether each input is waiting for more data (true), or is blocked (false), passed by reference. </param>
+    </member>
+    <member name="P:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.LogEntryInfos">
+      <summary>Gets an <see cref="T:Microsoft.SqlServer.Dts.Runtime.Wrapper.IDTSLogEntryInfos100" /> collection of logging events that the component has registered.</summary>
+      <returns>An <see cref="T:Microsoft.SqlServer.Dts.Runtime.Wrapper.IDTSLogEntryInfos100" /> collection of logging events that the component has registered.For more information, see Logging and Defining Log Entries in a Data Flow Component.</returns>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.MapInputColumn(System.Int32,System.Int32,System.Int32)">
+      <summary>Establishes a relationship between an input column and a corresponding external metadata column.</summary>
+      <returns>The <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSExternalMetadataColumn100" /> object that the input column is mapped to.</returns>
+      <param name="iInputID">The ID of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSInput100" /> object.</param>
+      <param name="iInputColumnID">The ID of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSInputColumn100" /> object.</param>
+      <param name="iExternalMetadataColumnID">The ID of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSExternalMetadataColumn100" /> object.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.MapOutputColumn(System.Int32,System.Int32,System.Int32,System.Boolean)">
+      <summary>Establishes a relationship between an output column and a corresponding external metadata column.</summary>
+      <returns>The <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSExternalMetadataColumn100" /> that is mapped to the output column.</returns>
+      <param name="iOutputID">The ID of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutput100" /> object.</param>
+      <param name="iOutputColumnID">The ID of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutputColumn100" /> object.</param>
+      <param name="iExternalMetadataColumnID">The ID of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSExternalMetadataColumn100" /> object.</param>
+      <param name="bMatch">Indicates whether the columns match.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.OnDeletingInputColumn(System.Int32,System.Int32)">
+      <summary>Deletes an <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSInputColumn100" /> object from the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSInputColumnCollection100" />.</summary>
+      <param name="inputID">Specifies the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSInput100" /> that contains the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSInputColumn100" /> that is being deleted.</param>
+      <param name="inputColumnID">Specifies the ID of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSInputColumn100" /> that is being deleted.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.OnInputPathAttached(System.Int32)">
+      <summary>Called when an <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSInput100" /> object is connected to the component through the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSPath100" /> interface.</summary>
+      <param name="inputID">Contains the ID of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSInput100" /> object that is attached.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.OnInputPathDetached(System.Int32)">
+      <summary>Called when an <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSInput100" /> object is disconnected from the component through the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSPath100" /> interface.</summary>
+      <param name="inputID">Specifies the ID of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSInput100" /> that was connected to the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSPath100" /> object.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.OnOutputPathAttached(System.Int32)">
+      <summary>Called when an <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutput100" /> object of the component is attached to a downstream component.</summary>
+      <param name="outputID">The ID of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutput100" /> object.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.PerformUpgrade(System.Int32)">
+      <summary>Upgrades the component metadata to the version of the component installed on the local computer.</summary>
+      <param name="pipelineVersion">The current version of the Integration Services data flow engine.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.PostExecute">
+      <summary>Called at the end of component execution, but before <see cref="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.Cleanup" />.</summary>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.PreExecute">
+      <summary>Called after <see cref="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.PrepareForExecute" />, and before <see cref="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.PrimeOutput(System.Int32,System.Int32[],Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer[])" /> and <see cref="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.ProcessInput(System.Int32,Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer)" />.</summary>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.PrepareForExecute">
+      <summary>Called before <see cref="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.PreExecute" />.</summary>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.PrimeOutput(System.Int32,System.Int32[],Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer[])">
+      <summary>Called at run time for source components and transformation components with asynchronous outputs to let these components add rows to the output buffers.</summary>
+      <param name="outputs">The number of elements in the <paramref name="outputIDs" /> and <paramref name="buffers" /> arrays.</param>
+      <param name="outputIDs">An array of <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutput100" /> ID's.</param>
+      <param name="buffers">An array of <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> objects.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.ProcessInput(System.Int32,Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer)">
+      <summary>Called at run time when a <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> from an upstream component is available to the component to let the component process the incoming rows.</summary>
+      <param name="inputID">The ID of the input of the component.</param>
+      <param name="buffer">The <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> object.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.ProvideComponentProperties">
+      <summary>Called when a component is first added to the data flow task, to initialize the <see cref="P:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.ComponentMetaData" /> of the component.</summary>
+    </member>
+    <member name="P:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.ReferenceTracker">
+      <summary>Gets the <see cref="T:Microsoft.SqlServer.Dts.Runtime.Wrapper.IDTSObjectReferenceTracker100" /> associated with the component.</summary>
+      <returns>The ReferenceTracker provides impact analysis for the SSIS run-time engine. Components register the variables and connections used by the component. If another object in the package tries to delete the variable or the connection referenced by the component, the system can verify that the variable or connection is used by the component, and displays the information.</returns>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.RegisterEvents">
+      <summary>When you are developing a custom data flow component, you override this method to create custom events.</summary>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.RegisterLogEntries">
+      <summary>Registers the events that the component will log.</summary>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.ReinitializeMetaData">
+      <summary>Repairs any errors identified during validation that cause the component to return <see cref="F:Microsoft.SqlServer.Dts.Pipeline.Wrapper.DTSValidationStatus.VS_NEEDSNEWMETADATA" /> at design time.</summary>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.ReleaseConnections">
+      <summary>Frees the connections established during <see cref="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.AcquireConnections(System.Object)" />. Called at design time and run time.</summary>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.RemoveAllInputsOutputsAndCustomProperties">
+      <summary>Deletes each <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSInput100" /> and <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutput100" /> object from the component.</summary>
+    </member>
+    <member name="F:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.s_STOCKPROPNAME_COMPFLAGS">
+      <summary>Contains the name of the ComparisonFlags property of data flow components.</summary>
+    </member>
+    <member name="F:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.s_STOCKPROPNAME_DELOUTPUTONPATHDETACHED">
+      <summary>Contains the name of the DeleteOutputOnPathDetached property of data flow components.</summary>
+    </member>
+    <member name="F:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.s_STOCKPROPNAME_EXCLGROUP">
+      <summary>Contains the name of the ExclusionGroup property of data flow components.</summary>
+    </member>
+    <member name="F:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.s_STOCKPROPNAME_HASSIDEEFFECTS">
+      <summary>Contains the name of the HasSideEffects property of data flow components.</summary>
+    </member>
+    <member name="F:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.s_STOCKPROPNAME_ISDISTRIBUTABLE">
+      <summary>Contains the name of the IsDistributable property of data flow components.</summary>
+    </member>
+    <member name="F:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.s_STOCKPROPNAME_ISERROROUT">
+      <summary>Contains the name of the IsErrorOut property of data flow components.</summary>
+    </member>
+    <member name="F:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.s_STOCKPROPNAME_ISSORTED">
+      <summary>Contains the name of the IsSorted property of data flow components.</summary>
+    </member>
+    <member name="F:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.s_STOCKPROPNAME_REFMETADATAID">
+      <summary>Contains the name of the ReferenceMetaDataID property of data flow components.</summary>
+    </member>
+    <member name="F:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.s_STOCKPROPNAME_SORTKEYPOS">
+      <summary>Contains the name of the SortKeyPosition property of data flow components.</summary>
+    </member>
+    <member name="F:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.s_STOCKPROPNAME_SYNCINPUTID">
+      <summary>Contains the name of the SynchronousInputID property of data flow components.</summary>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.SetComponentProperty(System.String,System.Object)">
+      <summary>Assigns a value to a <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSCustomProperty100" /> of the component.</summary>
+      <returns>The <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSCustomProperty100" /> object whose property is set.</returns>
+      <param name="propertyName">The name of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSCustomProperty100" /> whose value is set.</param>
+      <param name="propertyValue">The object stored in the Value property of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSCustomProperty100" /> object.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.SetExternalMetadataColumnDataTypeProperties(System.Int32,System.Int32,Microsoft.SqlServer.Dts.Runtime.Wrapper.DataType,System.Int32,System.Int32,System.Int32,System.Int32)">
+      <summary>Sets the data type properties of the specified external metadata column.</summary>
+      <param name="iID">The ID of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSInput100" /> or <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutput100" />  that the external metadata column is associated with.</param>
+      <param name="iExternalMetadataColumnID">The ID of the external metadata column.</param>
+      <param name="eDataType">A <see cref="T:Microsoft.SqlServer.Dts.Runtime.Wrapper.DataType" /> that contains the data type of the new external metadata column.</param>
+      <param name="iLength">The length of the new external metadata column.</param>
+      <param name="iPrecision">The numeric precision of the new external metadata column.</param>
+      <param name="iScale">The numeric scale of the new external metadata column.</param>
+      <param name="iCodePage">The code page of the new external metadata column.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.SetExternalMetadataColumnProperty(System.Int32,System.Int32,System.String,System.Object)">
+      <summary>Sets an individual property of an external metadata column.</summary>
+      <returns>An <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSCustomProperty100" /> that contains the modified property value.</returns>
+      <param name="iID">The ID of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSInput100" /> or <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutput100" />  that the external metadata column is associated with.</param>
+      <param name="iExternalMetadataColumnID">The ID of the external metadata column.</param>
+      <param name="strPropertyName">The name of the property whose value is being set.</param>
+      <param name="oValue">The value to assign to the property.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.SetInputColumnProperty(System.Int32,System.Int32,System.String,System.Object)">
+      <summary>Assigns a value to the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSCustomProperty100" /> of an <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSInputColumn100" /> object.</summary>
+      <returns>The <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSCustomProperty100" /> object whose property is set.</returns>
+      <param name="inputID">The ID of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSInput100" /> object that contains the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSInputColumn100" />.</param>
+      <param name="inputColumnID">The ID of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSInputColumn100" /> object whose <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSCustomProperty100" /> is being set.</param>
+      <param name="propertyName">The name of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSCustomProperty100" /> object.</param>
+      <param name="propertyValue">The value set in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSCustomProperty100" />.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.SetInputProperty(System.Int32,System.String,System.Object)">
+      <summary>Assigns a value to the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSCustomProperty100" /> of an <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSInput100" /> object.</summary>
+      <returns>The <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSCustomProperty100" /> object whose value is set.</returns>
+      <param name="inputID">The ID of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSInput100" /> object that contains the custom property.</param>
+      <param name="propertyName">The name of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSCustomProperty100" />.</param>
+      <param name="propertyValue">The value to assign to the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSCustomProperty100" />.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.SetOutputColumnDataTypeProperties(System.Int32,System.Int32,Microsoft.SqlServer.Dts.Runtime.Wrapper.DataType,System.Int32,System.Int32,System.Int32,System.Int32)">
+      <summary>Sets the data type properties of an <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutputColumn100" /> object.</summary>
+      <param name="iOutputID">The ID of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutput100" /> object.</param>
+      <param name="iOutputColumnID">The ID of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutputColumn100" /> object.</param>
+      <param name="eDataType">The <see cref="T:Microsoft.SqlServer.Dts.Runtime.Wrapper.DataType" /> of the column.</param>
+      <param name="iLength">The length of the column.</param>
+      <param name="iPrecision">The total number of digits in the column.</param>
+      <param name="iScale">The number of digits of precision in the column.</param>
+      <param name="iCodePage">The code page of the column.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.SetOutputColumnProperty(System.Int32,System.Int32,System.String,System.Object)">
+      <summary>Sets the value of an <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSCustomProperty100" /> for an <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutputColumn100" /> object.</summary>
+      <returns>The <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSCustomProperty100" /> whose value was set.</returns>
+      <param name="outputID">The ID of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutput100" /> that contains the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutputColumn100" /> object.</param>
+      <param name="outputColumnID">The ID of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutputColumn100" /> object.</param>
+      <param name="propertyName">The name of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSCustomProperty100" />.</param>
+      <param name="propertyValue">The value assigned to the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSCustomProperty100" />.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.SetOutputProperty(System.Int32,System.String,System.Object)">
+      <summary>Sets the value of an <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSCustomProperty100" /> on an <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutput100" /> object.</summary>
+      <returns>The <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSCustomProperty100" /> object whose value was set.</returns>
+      <param name="outputID">The ID of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSOutput100" /> whose <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSCustomProperty100" /> is set.</param>
+      <param name="propertyName">The name of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSCustomProperty100" /> to set.</param>
+      <param name="propertyValue">The value assigned to the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSCustomProperty100" />.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.SetUsageType(System.Int32,Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSVirtualInput100,System.Int32,Microsoft.SqlServer.Dts.Pipeline.Wrapper.DTSUsageType)">
+      <summary>Creates an <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSInputColumn100" /> object in the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSInputColumnCollection100" /> of the component and sets the <see cref="P:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSInputColumn100.UsageType" /> property of the column.</summary>
+      <returns>The <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSInputColumn100" /> object whose <see cref="P:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSInputColumn100.UsageType" /> is set.</returns>
+      <param name="inputID">The ID of the IDTSInput100 object.</param>
+      <param name="virtualInput">The IDTSVirtualInput100 object that is used to map the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSInputColumn100" /> object.</param>
+      <param name="lineageID">The <see cref="P:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSVirtualInputColumn100.LineageID" /> of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.IDTSVirtualInputColumn100" /> object.</param>
+      <param name="usageType">A value from the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.DTSUsageType" /> enumeration.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.Validate">
+      <summary>Verifies that the component is correctly configured.</summary>
+      <returns>A value from the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Wrapper.DTSValidationStatus" /> enumeration that indicates the status of the component.</returns>
+    </member>
+    <member name="P:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.VariableDispenser">
+      <summary>Gets the <see cref="T:Microsoft.SqlServer.Dts.Runtime.Wrapper.IDTSVariableDispenser100" /> of the data flow component.</summary>
+      <returns>The <see cref="T:Microsoft.SqlServer.Dts.Runtime.Wrapper.IDTSVariableDispenser100" /> object provided to the component.</returns>
+    </member>
+    <member name="T:Microsoft.SqlServer.Dts.Pipeline.PipelineComponentHResultException">
+      <summary>Exception raised by the Script component when it encounters a COM exception. </summary>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponentHResultException.#ctor(System.Int32)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineComponentHResultException" /> class.</summary>
+      <param name="code">The COM hresult returned by the underlying COM exception.</param>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponentHResultException.#ctor(System.String,System.Int32)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineComponentHResultException" /> class.</summary>
+      <param name="message">The message returned by the underlying COM exception.</param>
+      <param name="code">The COM hresult returned by the underlying COM exception.</param>
+    </member>
+    <member name="T:Microsoft.SqlServer.Dts.Pipeline.RowIndexOutOfRangeException">
+      <summary>The exception that is thrown when an invalid index is supplied when accessing a row in a <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" />. </summary>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.RowIndexOutOfRangeException.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.RowIndexOutOfRangeException" /> class.</summary>
+    </member>
+    <member name="T:Microsoft.SqlServer.Dts.Pipeline.UnsupportedBufferDataTypeException">
+      <summary>The exception that is thrown when assigning a value to a buffer column that contains the incorrect data type.</summary>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.UnsupportedBufferDataTypeException.#ctor(System.String)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.UnsupportedBufferDataTypeException" /> class.</summary>
+      <param name="typeName">The name of the data type.</param>
+    </member>
+    <member name="T:Microsoft.SqlServer.Dts.Pipeline.UnsupportedDataRecordTypeException">
+      <summary>The exception that is thrown when an unsupported parameter value is passed to the <see cref="M:Microsoft.SqlServer.Dts.Pipeline.PipelineComponent.DataRecordTypeToBufferType(System.Type)" /> method.</summary>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.UnsupportedDataRecordTypeException.#ctor(System.String)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.UnsupportedDataRecordTypeException" /> class.</summary>
+      <param name="typeName">The name of the data type.</param>
+    </member>
+    <member name="T:Microsoft.SqlServer.Dts.Pipeline.UnsupportedValueTypeForTextStreamColumnException">
+      <summary>The exception that is thrown when the type of the value that is being assigned to a column in a <see cref="T:Microsoft.SqlServer.Dts.Pipeline.PipelineBuffer" /> is not a string or byte array.</summary>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.UnsupportedValueTypeForTextStreamColumnException.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.UnsupportedValueTypeForTextStreamColumnException" /> class.</summary>
+    </member>
+    <member name="T:Microsoft.SqlServer.Dts.Pipeline.Localization.DtsLocalizableAttribute">
+      <summary>Provides localization support by populating the <see cref="P:Microsoft.SqlServer.Dts.Pipeline.Localization.DtsLocalizableAttribute.DisplayName" /> and <see cref="P:Microsoft.SqlServer.Dts.Pipeline.Localization.DtsLocalizableAttribute.Description" /> properties from an embedded resource file.</summary>
+    </member>
+    <member name="M:Microsoft.SqlServer.Dts.Pipeline.Localization.DtsLocalizableAttribute.#ctor(System.String,System.String)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Localization.DtsLocalizableAttribute" /> class.</summary>
+      <param name="localizedDisplayNameProperty">The name of the property used to look up the <see cref="P:Microsoft.SqlServer.Dts.Pipeline.Localization.DtsLocalizableAttribute.DisplayName" /> property in the resource class.</param>
+      <param name="localizedDescriptionProperty">The name of the property used to look up the <see cref="P:Microsoft.SqlServer.Dts.Pipeline.Localization.DtsLocalizableAttribute.Description" /> property in the resource class.</param>
+    </member>
+    <member name="P:Microsoft.SqlServer.Dts.Pipeline.Localization.DtsLocalizableAttribute.Description">
+      <summary>Gets or sets the description of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Localization.DtsLocalizableAttribute" />.</summary>
+      <returns>The description of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Localization.DtsLocalizableAttribute" />.</returns>
+    </member>
+    <member name="P:Microsoft.SqlServer.Dts.Pipeline.Localization.DtsLocalizableAttribute.DisplayName">
+      <summary>Gets or sets the display name of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Localization.DtsLocalizableAttribute" />.</summary>
+      <returns>The display name of the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Localization.DtsLocalizableAttribute" />.</returns>
+    </member>
+    <member name="P:Microsoft.SqlServer.Dts.Pipeline.Localization.DtsLocalizableAttribute.LocalizationType">
+      <summary>Gets or sets the class that supplies values for the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Localization.DtsLocalizableAttribute" />.</summary>
+      <returns>A System.Type that represents the class that supplies values for the <see cref="T:Microsoft.SqlServer.Dts.Pipeline.Localization.DtsLocalizableAttribute" />.</returns>
+    </member>
+  </members>
+</doc>

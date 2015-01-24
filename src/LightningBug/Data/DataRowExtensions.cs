@@ -5,6 +5,8 @@ namespace LightningBug.Data
 {
     public static class DataRowExtensions
     {
+
+
         public static T ToInstance<T>(this DataRow row) where T : new()
         {
             return row.ToInstance(() => new T());
