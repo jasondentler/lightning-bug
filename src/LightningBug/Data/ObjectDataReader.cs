@@ -5,9 +5,18 @@ using System.Linq;
 
 namespace LightningBug.Data
 {
+    /// <summary>
+    /// <see cref="System.Data.IDataReader"/> implementation backed by <see cref="IEnumerable{T}"/>
+    /// </summary>
+    /// <typeparam name="T">Type of instance to read from</typeparam>
     public class ObjectDataReader<T> : IDataReader
     {
         private IEnumerator<T> _dataEnumerator;
+
+        /// <summary>
+        /// Constructs an <see cref="ObjectDataReader{T}"/> backed by <see cref="IEnumerable{T}"/>
+        /// </summary>
+        /// <param name="data"><see cref="IEnumerable{T}"/> containing data returned by this <see cref="IDataReader"/></param>
         public ObjectDataReader(IEnumerable<T> data)
         {
             _dataEnumerator = data.GetEnumerator();

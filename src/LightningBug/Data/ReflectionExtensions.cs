@@ -6,6 +6,13 @@ namespace LightningBug.Data
 {
     public static class ReflectionExtensions
     {
+
+        /// <summary>
+        /// Creates a delegate for the getter of the property
+        /// </summary>
+        /// <typeparam name="TInstanceType">Type of instance to read</typeparam>
+        /// <param name="pi">Property with getter</param>
+        /// <returns>A delegate for the getter of the property</returns>
         public static Func<TInstanceType, object> BuildGetDelegate<TInstanceType>(this PropertyInfo pi)
         {
             var instanceParam = Expression.Parameter(typeof(TInstanceType), "instance");
@@ -19,6 +26,12 @@ namespace LightningBug.Data
             return lambda.Compile();
         }
 
+        /// <summary>
+        /// Creates a delegate for the setter of the property
+        /// </summary>
+        /// <typeparam name="TInstanceType">Type of instance to write</typeparam>
+        /// <param name="pi">Property with setter</param>
+        /// <returns>A delegate for the setter of the property</returns>
         public static Action<TInstanceType, object> BuildSetDelegate<TInstanceType>(this PropertyInfo pi)
         {
             var instanceParam = Expression.Parameter(typeof(TInstanceType), "instance");

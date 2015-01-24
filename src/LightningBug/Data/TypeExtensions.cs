@@ -5,6 +5,11 @@ namespace LightningBug.Data
 {
     public static class TypeExtensions
     {
+        /// <summary>
+        /// Returns the SQL data type corresponding to <paramref name="type"/>
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns>The SQL data type corresponding to <paramref name="type"/></returns>
         public static DataType ToSmoDataType(this Type type)
         {
             if (type == typeof(string)) return DataType.NVarCharMax;
