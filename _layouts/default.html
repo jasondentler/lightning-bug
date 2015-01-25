@@ -15,7 +15,7 @@
 	{% else %}
 	<link rel="canonical" href="{{ site.baseurl }}" />
 	{% endif %}
-	{% if page.title %}
+	{% if page.title.size %}
 	<title>{{ page.title }}</title>
 	{% else %}
 	<title>Lightning Bug</title>
