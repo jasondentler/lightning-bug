@@ -55,13 +55,13 @@
     <Compile Include="Data\DataRowExtensions.cs" />
     <Compile Include="Data\DataTableExtensions.cs" />
     <Compile Include="Data\UpdateOperation.cs" />
-    <Compile Include="Data\GetterDelegateCache.cs" />
     <Compile Include="Data\ObjectDataReader.cs" />
     <Compile Include="Data\SqlBulkCopyExtensions.cs" />
     <Compile Include="Data\TypeExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Data\ReflectionExtensions.cs" />
-    <Compile Include="Data\SetterDelegateCache.cs" />
+    <Compile Include="Reflection\GetterDelegateCache.cs" />
+    <Compile Include="Reflection\ReflectionExtensions.cs" />
+    <Compile Include="Reflection\SetterDelegateCache.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

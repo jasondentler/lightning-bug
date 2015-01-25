@@ -2,7 +2,7 @@
 using Should;
 using Xunit;
 
-namespace LightningBug.Data
+namespace LightningBug.Reflection
 {
     public class GetterDelegateCacheFixture
     {

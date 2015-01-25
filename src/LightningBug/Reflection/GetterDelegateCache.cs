@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using LightningBug.Data;
 
-namespace LightningBug.Data
+namespace LightningBug.Reflection
 {
     /// <summary>
     /// Caches delegates for reading properties

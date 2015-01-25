@@ -2,7 +2,7 @@
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace LightningBug.Data
+namespace LightningBug.Reflection
 {
     public static class ReflectionExtensions
     {

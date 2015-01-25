@@ -1,7 +1,8 @@
-﻿using Should;
+﻿using LightningBug.Data;
+using Should;
 using Xunit;
 
-namespace LightningBug.Data
+namespace LightningBug.Reflection
 {
     public class ReflectionExtensionsFixture
     {
