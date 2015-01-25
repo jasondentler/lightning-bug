@@ -1,0 +1,7 @@
+safe: true
+lsi: false
+pygments: true
+exclude: rakefile.rb, README.md
+permalink: /blog/:year/:month/:title
+baseurl: http://lightningbug.jasondentler.com
+markdown: kramdown
