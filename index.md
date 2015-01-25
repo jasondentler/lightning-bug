@@ -1,10 +1,10 @@
 ---
 layout: default
-title: "Lightning Bug"
+title: ""
 ---
 ### What is it?
 
-Lightning Bug is a collection of flashy, short-lived bits of code for common tasks.
+Lightning Bug is a collection of flashy but short-lived bits of code for common tasks.
 
 ### LightningBug.Data
 

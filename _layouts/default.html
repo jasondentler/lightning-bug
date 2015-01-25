@@ -15,7 +15,11 @@
 	{% else %}
 	<link rel="canonical" href="{{ site.baseurl }}" />
 	{% endif %}
+	{% if page.title %}
 	<title>{{ page.title }}</title>
+	{% else %}
+	<title>Lightning Bug</title>
+	{% endif %}
 	<link rel="stylesheet" href="stylesheets/stylesheet.css" media="screen">
 	<link rel="stylesheet" href="stylesheets/pygment_trac.css">
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
