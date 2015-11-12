@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>LightningBug</id>
-    <version>1.1.0.0</version>
+    <version>1.1.1.0</version>
     <title>Lightning Bug</title>
     <authors>JasonDentler</authors>
     <owners>JasonDentler</owners>
@@ -12,6 +12,6 @@
     <description>Lightning Bug is a collection of flashy but short-lived bits of code for common tasks.</description>
     <releaseNotes>Refactor namespaces</releaseNotes>
     <copyright>Copyright 2015 Jason Dentler</copyright>
-    <tags>SQL data bug lightning bulk copy</tags>
+    <tags>SQL data bug lightning bulk copy etl</tags>
   </metadata>
 </package>
