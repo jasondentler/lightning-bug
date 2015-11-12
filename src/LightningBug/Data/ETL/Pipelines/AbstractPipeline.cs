@@ -48,23 +48,16 @@ namespace LightningBug.Data.ETL.Pipelines
 
         public virtual void Execute()
         {
-            Debug.WriteLine("Executing pipeline");
-            try
-            {
-                if (!operationEntries.Any()) return;
+            if (!operationEntries.Any()) return;
 
-                AddFinalOperation();
+            AddFinalOperation();
 
-                ExecuteOperation(operationEntries.First(), null, operationEntries.Skip(1));
-            }
-            finally
-            {
-                Debug.WriteLine("Executed pipeline");
-            }
+            ExecuteOperation(operationEntries.First(), null, operationEntries.Skip(1));
         }
 
         private void ExecuteOperation(OperationEntry operationEntry, IEnumerable previousOutput, IEnumerable<OperationEntry> childOperations)
         {
+            Debug.WriteLine(string.Format("Executing {0}", operationEntry.Operation.Name));
             var nextOperationCallback = GenerateNextOperationCallback(operationEntry, childOperations);
             ExecuteOperation(operationEntry, previousOutput, nextOperationCallback);
         }

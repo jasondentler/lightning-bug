@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using LightningBug.Data.ETL.Operations;
@@ -134,6 +137,76 @@ namespace LightningBug.Data.ETL.Pipelines
             pipeline.AddOperation(op1.Object);
 
             Assert.Throws<InvalidCastException>(() => pipeline.AddOperation(op2.Object));
+        }
+
+        [Fact(Skip = "DB")]
+        public void ReadDatabaseRecords()
+        {
+            var connectionString = "Server=.;Database=ETLTest;Integrated Security=SSPI;";
+            var connectionProvider = new Func<IDbConnection>(() => new SqlConnection(connectionString));
+            var source = new DatabaseSource<Record>(connectionProvider, "SELECT TOP 1000 * FROM TestTableSize");
+            var pipeline = CreateNewPipeline();
+            pipeline.AddOperation(source);
+            pipeline.Execute();
+        }
+
+        [Fact(Skip = "DB")]
+        public void Full()
+        {
+            var stopwatch = new Stopwatch();
+            var connectionString = "Server=.;Database=ETLTest;Integrated Security=SSPI;";
+            var connectionProvider = new Func<SqlConnection>(() => new SqlConnection(connectionString));
+            var read = new DatabaseSource<Record>(connectionProvider, "SELECT * FROM TestTableSize");
+            var convert = new ConversionOperation<Record, ResultingRecord>(input => input);
+            var write = new SqlBulkCopyOperation<ResultingRecord>(connectionProvider, "ResultingRecord");
+            var pipeline = CreateNewPipeline();
+            pipeline.AddOperation(read);
+            pipeline.AddOperation(convert);
+            pipeline.AddOperation(write);
+            stopwatch.Start();
+            pipeline.Execute();
+            stopwatch.Stop();
+            Debug.WriteLine(string.Format("Processed in {0}", stopwatch.Elapsed));
+        }
+
+        public class Record
+        {
+            public string MyKeyField { get; set; }
+            public DateTime MyDate1 { get; set; }
+            public DateTime MyDate2 { get; set; }
+            public DateTime MyDate3 { get; set; }
+            public DateTime MyDate4 { get; set; }
+            public DateTime MyDate5 { get; set; }
+
+            public override string ToString()
+            {
+                return string.Format("Record " + MyKeyField);
+            }
+
+
+            public static implicit operator ResultingRecord(Record record)
+            {
+                return new ResultingRecord()
+                {
+                    Id = record.MyKeyField,
+                    MinimumDate = new[]
+                    {
+                        record.MyDate1,
+                        record.MyDate2,
+                        record.MyDate3,
+                        record.MyDate4,
+                        record.MyDate5
+                    }.Min()
+                };
+            }
+        }
+
+        public class ResultingRecord
+        {
+            public string Id { get; set; }
+            public DateTime MinimumDate { get; set; }
+
+
         }
 
         private IEnumerable<int> SlowEnumerable(int count, TimeSpan wait)

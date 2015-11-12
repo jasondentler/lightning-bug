@@ -57,9 +57,14 @@
     <Compile Include="Data\ETL\Enumerators\ChainedEnumeratorWrapper.cs" />
     <Compile Include="Data\ETL\Enumerators\IChainedEnumerator.cs" />
     <Compile Include="Data\ETL\Enumerators\ThreadSafeEnumerator.cs" />
+    <Compile Include="Data\ETL\Operations\AbstractDatabaseSource.cs" />
+    <Compile Include="Data\ETL\Operations\AbstractProjectionOperation.cs" />
+    <Compile Include="Data\ETL\Operations\ConversionOperation.cs" />
     <Compile Include="Data\ETL\Operations\FinalOperation.cs" />
     <Compile Include="Data\ETL\Operations\IOperation.cs" />
     <Compile Include="Data\ETL\Operations\MultiThreadedOperationWrapper.cs" />
+    <Compile Include="Data\ETL\Operations\DatabaseSource.cs" />
+    <Compile Include="Data\ETL\Operations\SqlBulkCopyOperation.cs" />
     <Compile Include="Data\ETL\Pipelines\AbstractPipeline.cs" />
     <Compile Include="Data\ETL\Pipelines\IPipeline.cs" />
     <Compile Include="Data\ETL\Pipelines\SimplePipeline.cs" />
