@@ -150,7 +150,7 @@ namespace LightningBug.Data.ETL.Pipelines
             pipeline.Execute();
         }
 
-        [Fact(Skip = "DB")]
+        [Fact()]
         public void Full()
         {
             var stopwatch = new Stopwatch();

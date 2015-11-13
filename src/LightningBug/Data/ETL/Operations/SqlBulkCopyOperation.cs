@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
+using LightningBug.Reflection;
 
 namespace LightningBug.Data.ETL.Operations
 {
@@ -26,6 +29,7 @@ namespace LightningBug.Data.ETL.Operations
                 using (var bcp = new SqlBulkCopy(conn))
                 {
                     bcp.DestinationTableName = _destinationTable;
+                    SetupMappings(bcp);
                     bcp.Insert(reader);
                 }
             }
@@ -33,5 +37,29 @@ namespace LightningBug.Data.ETL.Operations
         }
 
         public string Name { get { return "Database Destination:" + _destinationTable; } }
+
+        private void SetupMappings(SqlBulkCopy bcp)
+        {
+            var properties = GetterDelegateCache<TInput>.ReadablePropertyNames.ToArray();
+
+            var conn = bcp.GetConnection();
+
+            var destination = bcp.DestinationTableName;
+
+            var destinationParts = new List<string>(SqlIdentifier.Parse(destination));
+
+            while (destinationParts.Count < 3)
+                destinationParts.Insert(0, null);
+
+            var schemaTable = conn.GetSchema("Columns", destinationParts.ToArray());
+
+            var columns = schemaTable.Rows.Cast<DataRow>()
+                .Select(r => (string) r[3])
+                .ToArray();
+
+            foreach (var map in properties.Intersect(columns, StringComparer.InvariantCultureIgnoreCase))
+                bcp.ColumnMappings.Add(new SqlBulkCopyColumnMapping(map, map));
+
+        }
     }
 }

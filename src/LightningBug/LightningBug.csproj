@@ -69,6 +69,7 @@
     <Compile Include="Data\ETL\Pipelines\IPipeline.cs" />
     <Compile Include="Data\ETL\Pipelines\SimplePipeline.cs" />
     <Compile Include="Data\ETL\Pipelines\ThreadedPipeline.cs" />
+    <Compile Include="Data\SqlIdentifier.cs" />
     <Compile Include="Data\UpdateOperation.cs" />
     <Compile Include="Data\ObjectDataReader.cs" />
     <Compile Include="Data\SqlBulkCopyExtensions.cs" />
