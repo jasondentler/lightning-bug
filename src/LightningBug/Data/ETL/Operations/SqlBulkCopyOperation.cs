@@ -18,6 +18,8 @@ namespace LightningBug.Data.ETL.Operations
         {
             _connectionProvider = connectionProvider;
             _destinationTable = destinationTable;
+            using (var bcp = new SqlBulkCopy(""))
+                Timeout = TimeSpan.FromSeconds(bcp.BulkCopyTimeout);
         }
 
         public IEnumerable<object> Execute(IEnumerable<TInput> input)
@@ -29,12 +31,15 @@ namespace LightningBug.Data.ETL.Operations
                 using (var bcp = new SqlBulkCopy(conn))
                 {
                     bcp.DestinationTableName = _destinationTable;
+                    bcp.BulkCopyTimeout = (int) Math.Ceiling(Timeout.TotalSeconds);
                     SetupMappings(bcp);
                     bcp.Insert(reader);
                 }
             }
             return Enumerable.Empty<object>();
         }
+
+        public TimeSpan Timeout { get; set; }
 
         public string Name { get { return "Database Destination:" + _destinationTable; } }
 
