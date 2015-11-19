@@ -65,6 +65,8 @@
     <Compile Include="Data\ETL\Operations\MultiThreadedOperationWrapper.cs" />
     <Compile Include="Data\ETL\Operations\DatabaseSource.cs" />
     <Compile Include="Data\ETL\Operations\SqlBulkCopyOperation.cs" />
+    <Compile Include="Data\ETL\Operations\SqlCommandOperation.cs" />
+    <Compile Include="Data\ETL\Operations\CommandOperation.cs" />
     <Compile Include="Data\ETL\Pipelines\AbstractPipeline.cs" />
     <Compile Include="Data\ETL\Pipelines\IPipeline.cs" />
     <Compile Include="Data\ETL\Pipelines\SimplePipeline.cs" />
