@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>LightningBug</id>
-    <version>1.2.0.0</version>
+    <version>1.2.0.2</version>
     <title>Lightning Bug</title>
     <authors>JasonDentler</authors>
     <owners>JasonDentler</owners>
@@ -11,7 +11,10 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Lightning Bug is a collection of flashy but short-lived bits of code for common tasks.</description>
     <releaseNotes>Refactor namespaces</releaseNotes>
-    <copyright>Copyright 2015 Jason Dentler</copyright>
+    <copyright>Copyright 2017 Jason Dentler</copyright>
     <tags>SQL data bug lightning bulk copy</tags>
+    <dependencies>
+      <dependency id="Microsoft.SqlServer.SqlManagementObjects" version="140.17177.0" />
+    </dependencies>
   </metadata>
 </package>
