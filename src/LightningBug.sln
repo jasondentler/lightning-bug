@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.6
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightningBug", "LightningBug\LightningBug.csproj", "{7FDBC7AA-8CA7-4AFE-8BBB-3CC0901FAE95}"
 EndProject
@@ -14,6 +16,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{7E58FF
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 		..\nugetpack.cmd = ..\nugetpack.cmd
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0DA07422-68ED-4C65-B73B-A8EB51EBFFE8}"
+	ProjectSection(SolutionItems) = preProject
+		..\nuget\LightningBug.nuspec = ..\nuget\LightningBug.nuspec
 	EndProjectSection
 EndProject
 Global

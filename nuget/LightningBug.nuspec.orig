@@ -2,7 +2,11 @@
 <package >
   <metadata>
     <id>LightningBug</id>
-    <version>1.2.0.3</version>
+<<<<<<< HEAD
+    <version>1.2.0.2</version>
+=======
+    <version>1.1.2.4</version>
+>>>>>>> 8d805a33adf45e6214e4f958d80f0267b9ecf896
     <title>Lightning Bug</title>
     <authors>JasonDentler</authors>
     <owners>JasonDentler</owners>
@@ -10,11 +14,17 @@
     <iconUrl>http://lightningbug.jasondentler.com/images/lightningbug_vector.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Lightning Bug is a collection of flashy but short-lived bits of code for common tasks.</description>
-    <releaseNotes>Reference SQL SMO nuget instead of GAC</releaseNotes>
+<<<<<<< HEAD
+    <releaseNotes>Refactor namespaces</releaseNotes>
     <copyright>Copyright 2017 Jason Dentler</copyright>
     <tags>SQL data bug lightning bulk copy</tags>
     <dependencies>
       <dependency id="Microsoft.SqlServer.SqlManagementObjects" version="140.17177.0" />
     </dependencies>
+=======
+    <releaseNotes>Command operations</releaseNotes>
+    <copyright>Copyright 2015 Jason Dentler</copyright>
+    <tags>SQL data bug lightning bulk copy etl</tags>
+>>>>>>> 8d805a33adf45e6214e4f958d80f0267b9ecf896
   </metadata>
 </package>
