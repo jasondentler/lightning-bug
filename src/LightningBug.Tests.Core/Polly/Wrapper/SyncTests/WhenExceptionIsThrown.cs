@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Shouldly;
 using Xunit;
 
 namespace LightningBug.Polly.Wrapper.SyncTests
@@ -21,12 +22,38 @@ namespace LightningBug.Polly.Wrapper.SyncTests
         }
 
         [Fact]
-        public void X()
+        public void WithoutPolicy()
         {
             var impl = new Throw();
-            var provider = new TestPolicyProvider();
+            var provider = new NullPolicyProvider();
             var proxy = PollyWrapper<IThrow>.Decorate(impl, provider);
             Assert.Throws<ApplicationException>(() => proxy.ThrowException());
+        }
+
+        [Fact]
+        public void WithPolicy()
+        {
+            var impl = new Throw();
+            var provider = new NoOpPolicyProvider();
+            var proxy = PollyWrapper<IThrow>.Decorate(impl, provider);
+            Assert.Throws<ApplicationException>(() => proxy.ThrowException());
+        }
+
+        [Fact]
+        public void ExecutesPolicy()
+        {
+            var impl = new Throw();
+            var executed = false;
+            var provider = new CallbackPolicyProvider((method, arguments) => executed = true);
+            var proxy = PollyWrapper<IThrow>.Decorate(impl, provider);
+            try
+            {
+                proxy.ThrowException();
+            }
+            catch
+            {
+            }
+            executed.ShouldBeTrue();
         }
 
     }

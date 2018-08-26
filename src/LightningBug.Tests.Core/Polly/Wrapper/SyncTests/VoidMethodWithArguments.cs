@@ -30,14 +30,37 @@ namespace LightningBug.Polly.Wrapper.SyncTests
         }
 
         [Fact]
-        public void X()
+        public void WithoutPolicy()
         {
             var output = new StringWriter();
             var impl = new Service(output);
-            var provider = new TestPolicyProvider();
+            var provider = new NullPolicyProvider();
             var proxy = PollyWrapper<IService>.Decorate(impl, provider);
             proxy.Say(HelloWorld);
             output.ToString().ShouldBe(HelloWorld);
+        }
+
+        [Fact]
+        public void WithPolicy()
+        {
+            var output = new StringWriter();
+            var impl = new Service(output);
+            var provider = new NoOpPolicyProvider();
+            var proxy = PollyWrapper<IService>.Decorate(impl, provider);
+            proxy.Say(HelloWorld);
+            output.ToString().ShouldBe(HelloWorld);
+        }
+
+        [Fact]
+        public void ExecutesPolicy()
+        {
+            var output = new StringWriter();
+            var impl = new Service(output);
+            var executed = false;
+            var provider = new CallbackPolicyProvider((method, arguments) => executed = true);
+            var proxy = PollyWrapper<IService>.Decorate(impl, provider);
+            proxy.Say(HelloWorld);
+            executed.ShouldBeTrue();
         }
     }
 }

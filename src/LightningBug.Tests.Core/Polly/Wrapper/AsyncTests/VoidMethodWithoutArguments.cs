@@ -31,14 +31,37 @@ namespace LightningBug.Polly.Wrapper.AsyncTests
         }
 
         [Fact]
-        public async Task X()
+        public async Task WithoutPolicy()
         {
             var output = new StringWriter();
             var impl = new Service(output);
-            var provider = new TestPolicyProvider();
+            var provider = new NullPolicyProvider();
             var proxy = PollyWrapper<IService>.Decorate(impl, provider);
             await proxy.SayHelloWorldAsync();
             output.ToString().ShouldBe(HelloWorld);
+        }
+
+        [Fact]
+        public async Task WithPolicy()
+        {
+            var output = new StringWriter();
+            var impl = new Service(output);
+            var provider = new NoOpPolicyProvider();
+            var proxy = PollyWrapper<IService>.Decorate(impl, provider);
+            await proxy.SayHelloWorldAsync();
+            output.ToString().ShouldBe(HelloWorld);
+        }
+
+        [Fact]
+        public async Task ExecutesPolicy()
+        {
+            var output = new StringWriter();
+            var impl = new Service(output);
+            var executed = false;
+            var provider = new CallbackPolicyProvider((method, arguments) => executed = true);
+            var proxy = PollyWrapper<IService>.Decorate(impl, provider);
+            await proxy.SayHelloWorldAsync();
+            executed.ShouldBeTrue();
         }
     }
 }

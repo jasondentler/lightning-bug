@@ -84,7 +84,7 @@ namespace LightningBug.Polly.Wrapper
         public void ThrowWhenWrappingAClass()
         {
             var impl = new Service();
-            var provider = new TestPolicyProvider();
+            var provider = new NullPolicyProvider();
             Assert.Throws<TypeInitializationException>(() => PollyWrapper<Service>.Decorate(impl, provider));
         }
 
@@ -92,7 +92,7 @@ namespace LightningBug.Polly.Wrapper
         public void WrapASimpleInterface()
         {
             var impl = new Service();
-            var provider = new TestPolicyProvider();
+            var provider = new NullPolicyProvider();
             var proxyAsInterface = PollyWrapper<IService>.Decorate(impl, provider);
         }
 
@@ -100,9 +100,9 @@ namespace LightningBug.Polly.Wrapper
         public void InitializeTheUnderlyingServiceProperty()
         {
             var impl = new Service();
-            var provider = new TestPolicyProvider();
+            var provider = new NullPolicyProvider();
             var proxyAsInterface = PollyWrapper<IService>.Decorate(impl, provider);
-            var proxyAsProxy = (Proxy<IService, TestPolicyProvider>) proxyAsInterface;
+            var proxyAsProxy = (Proxy<IService, NullPolicyProvider>) proxyAsInterface;
             proxyAsProxy.Service.ShouldBeSameAs(impl);
         }
 
@@ -110,9 +110,9 @@ namespace LightningBug.Polly.Wrapper
         public void InitializeThePolicyProviderProperty()
         {
             var impl = new Service();
-            var provider = new TestPolicyProvider();
+            var provider = new NullPolicyProvider();
             var proxyAsInterface = PollyWrapper<IService>.Decorate(impl, provider);
-            var proxyAsProxy = (Proxy<IService, TestPolicyProvider>)proxyAsInterface;
+            var proxyAsProxy = (Proxy<IService, NullPolicyProvider>)proxyAsInterface;
             proxyAsProxy.PolicyProvider.ShouldBeSameAs(provider);
         }
 

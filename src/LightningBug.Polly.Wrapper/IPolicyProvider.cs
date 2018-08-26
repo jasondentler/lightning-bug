@@ -2,5 +2,8 @@
 {
     public interface IPolicyProvider
     {
+        global::Polly.ISyncPolicy GetSyncPolicy();
+        global::Polly.IAsyncPolicy GetAsyncPolicy();
     }
+
 }
