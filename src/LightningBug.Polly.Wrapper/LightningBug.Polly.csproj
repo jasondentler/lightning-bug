@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Jason Dentler</Authors>
+    <Description>Decorate a service interface with Polly policies for resilience and transient-fault-handling with patterns such as Retry, Circuit Breaker, Timeout, Bulkhead Isolation, and Fallback</Description>
+    <Copyright>(c) 2018 Jason Dentler</Copyright>
+    <PackageIconUrl>http://lightningbug.jasondentler.com/images/lightningbug_vector.png</PackageIconUrl>
+    <PackageProjectUrl>http://lightningbug.jasondentler.com</PackageProjectUrl>
+    <Version>1.2.0.3</Version>
+    <RepositoryUrl>https://github.com/jasondentler/lightning-bug</RepositoryUrl>
+    <RootNamespace>LightningBug.Polly</RootNamespace>
+    <AssemblyName>LightningBug.Polly</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Polly" Version="6.1.0" />
+    <PackageReference Include="System.Reflection.DispatchProxy" Version="4.5.1" />
+  </ItemGroup>
+
+</Project>
