@@ -1,5 +1,5 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
+using LightningBug.Polly.Providers;
 using Polly;
 
 namespace LightningBug.Polly.Wrapper
@@ -31,7 +31,7 @@ namespace LightningBug.Polly.Wrapper
         }
 
 
-        public ISyncPolicy GetSyncPolicy()
+        public ISyncPolicy GetSyncPolicy(MethodInfo methodInfo)
         {
             var iface = DispatchProxy.Create<ISyncPolicy, Proxy<ISyncPolicy>>();
             var proxy = iface as Proxy<ISyncPolicy>;
@@ -40,7 +40,7 @@ namespace LightningBug.Polly.Wrapper
             return iface;
         }
 
-        public IAsyncPolicy GetAsyncPolicy()
+        public IAsyncPolicy GetAsyncPolicy(MethodInfo methodInfo)
         {
             var iface = DispatchProxy.Create<IAsyncPolicy, Proxy<IAsyncPolicy>>();
             var proxy = iface as Proxy<IAsyncPolicy>;

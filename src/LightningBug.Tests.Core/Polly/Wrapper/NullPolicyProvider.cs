@@ -1,21 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
-using System.Threading;
+﻿using System.Reflection;
+using LightningBug.Polly.Providers;
 using Polly;
-using Polly.NoOp;
 
 namespace LightningBug.Polly.Wrapper
 {
     public class NullPolicyProvider : IPolicyProvider
     {
-        public ISyncPolicy GetSyncPolicy()
+        public ISyncPolicy GetSyncPolicy(MethodInfo methodInfo)
         {
             return null;
         }
 
-        public IAsyncPolicy GetAsyncPolicy()
+        public IAsyncPolicy GetAsyncPolicy(MethodInfo methodInfo)
         {
             return null;
         }

@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using LightningBug.Polly.Providers;
 using Polly;
 
 namespace LightningBug.Polly
@@ -61,22 +62,22 @@ namespace LightningBug.Polly
 
         private static object Get(TService service, TPolicyProvider policyProvider, MethodInfo methodInfo)
         {
-            return Execute(() => GettersCache<TService>.Get(service, methodInfo), policyProvider);
+            return Execute(() => GettersCache<TService>.Get(service, methodInfo), methodInfo, policyProvider);
         }
 
         private static object Get(TService service, TPolicyProvider policyProvider, MethodInfo methodInfo, object[] indexParameters)
         {
-            return Execute(() => IndexedGettersCache<TService>.Get(service, methodInfo, indexParameters), policyProvider);
+            return Execute(() => IndexedGettersCache<TService>.Get(service, methodInfo, indexParameters), methodInfo, policyProvider);
         }
 
         private static void Set(TService service, TPolicyProvider policyProvider, MethodInfo methodInfo, object value)
         {
-            Execute(() => SettersCache<TService>.Set(service, methodInfo, value), policyProvider);
+            Execute(() => SettersCache<TService>.Set(service, methodInfo, value), methodInfo, policyProvider);
         }
 
         private static void Set(TService service, TPolicyProvider policyProvider, MethodInfo methodInfo, object[] indexParameters, object value)
         {
-            Execute(() => IndexedSettersCache<TService>.Set(service, methodInfo, indexParameters, value), policyProvider);
+            Execute(() => IndexedSettersCache<TService>.Set(service, methodInfo, indexParameters, value), methodInfo, policyProvider);
         }
 
         private static object Call(
@@ -85,7 +86,8 @@ namespace LightningBug.Polly
             MethodInfo methodInfo, 
             object[] args)
         {
-            return Execute(() => SyncMethodCache<TService>.Call(service, methodInfo, args), policyProvider);
+            var cb = new Func<object>(() => SyncMethodCache<TService>.Call(service, methodInfo, args));
+            return Execute(cb, methodInfo, policyProvider);
         }
 
         private static async Task<object> CallAsync(
@@ -94,12 +96,13 @@ namespace LightningBug.Polly
             MethodInfo methodInfo,
             object[] args)
         {
-            return await ExecuteAsync(() => AsyncMethodCache<TService>.Call(service, methodInfo, args), policyProvider);
+            var cb = new Func<Task<object>>(() => AsyncMethodCache<TService>.Call(service, methodInfo, args));
+            return await ExecuteAsync(cb, methodInfo, policyProvider);
         }
 
-        private static void Execute(Action cb, TPolicyProvider provider)
+        private static void Execute(Action cb, MethodInfo methodInfo, TPolicyProvider provider)
         {
-            var policy = provider.GetSyncPolicy();
+            var policy = provider.GetSyncPolicy(methodInfo);
 
             if (policy == null)
             {
@@ -113,9 +116,9 @@ namespace LightningBug.Polly
                 throw new TargetInvocationException(result.FinalException);
         }
 
-        private static object Execute(Func<object> cb, TPolicyProvider provider)
+        private static object Execute(Func<object> cb, MethodInfo methodInfo, TPolicyProvider provider)
         {
-            var policy = provider.GetSyncPolicy();
+            var policy = provider.GetSyncPolicy(methodInfo);
 
             if (policy == null)
             {
@@ -130,9 +133,9 @@ namespace LightningBug.Polly
             return result.Result;
         }
 
-        private static async Task<object> ExecuteAsync(Func<Task<object>> cb, TPolicyProvider provider)
+        private static async Task<object> ExecuteAsync(Func<Task<object>> cb, MethodInfo methodInfo, TPolicyProvider provider)
         {
-            var policy = provider.GetAsyncPolicy();
+            var policy = provider.GetAsyncPolicy(methodInfo);
 
             if (policy == null)
             {

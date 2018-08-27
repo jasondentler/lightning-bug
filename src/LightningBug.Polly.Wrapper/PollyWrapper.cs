@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using LightningBug.Polly.Providers;
 
 namespace LightningBug.Polly
 {
