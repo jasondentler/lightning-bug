@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using LightningBug.Polly.Providers;
 using Shouldly;
 using Xunit;
 
@@ -34,7 +35,7 @@ namespace LightningBug.Polly.Wrapper
             {
             }
 
-            public Service(System.IO.TextWriter output)
+            public Service(TextWriter output)
             {
                 Id = Guid.Empty.ToString();
                 Name = "John Smith";
@@ -84,24 +85,27 @@ namespace LightningBug.Polly.Wrapper
         public void ThrowWhenWrappingAClass()
         {
             var impl = new Service();
-            var provider = new NullPolicyProvider();
-            Assert.Throws<TypeInitializationException>(() => PollyWrapper<Service>.Decorate(impl, provider));
+            var policyProvider = new NullPolicyProvider();
+            var contextProvider = new ContextProvider();
+            Assert.Throws<TypeInitializationException>(() => PollyWrapper<Service>.Decorate(impl, policyProvider, contextProvider));
         }
 
         [Fact]
         public void WrapASimpleInterface()
         {
             var impl = new Service();
-            var provider = new NullPolicyProvider();
-            var proxyAsInterface = PollyWrapper<IService>.Decorate(impl, provider);
+            var policyProvider = new NullPolicyProvider();
+            var contextProvider = new ContextProvider();
+            var proxyAsInterface = PollyWrapper<IService>.Decorate(impl, policyProvider, contextProvider);
         }
 
         [Fact]
         public void InitializeTheUnderlyingServiceProperty()
         {
             var impl = new Service();
-            var provider = new NullPolicyProvider();
-            var proxyAsInterface = PollyWrapper<IService>.Decorate(impl, provider);
+            var policyProvider = new NullPolicyProvider();
+            var contextProvider = new ContextProvider();
+            var proxyAsInterface = PollyWrapper<IService>.Decorate(impl, policyProvider, contextProvider);
             var proxyAsProxy = (Proxy<IService, NullPolicyProvider>) proxyAsInterface;
             proxyAsProxy.Service.ShouldBeSameAs(impl);
         }
@@ -110,10 +114,11 @@ namespace LightningBug.Polly.Wrapper
         public void InitializeThePolicyProviderProperty()
         {
             var impl = new Service();
-            var provider = new NullPolicyProvider();
-            var proxyAsInterface = PollyWrapper<IService>.Decorate(impl, provider);
+            var policyProvider = new NullPolicyProvider();
+            var contextProvider = new ContextProvider();
+            var proxyAsInterface = PollyWrapper<IService>.Decorate(impl, policyProvider, contextProvider);
             var proxyAsProxy = (Proxy<IService, NullPolicyProvider>)proxyAsInterface;
-            proxyAsProxy.PolicyProvider.ShouldBeSameAs(provider);
+            proxyAsProxy.PolicyProvider.ShouldBeSameAs(policyProvider);
         }
 
 

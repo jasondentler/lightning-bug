@@ -11,10 +11,11 @@ namespace LightningBug.Polly
 
         internal TService Service { get; set; }
         internal TPolicyProvider PolicyProvider { get; set; }
+        public IContextProvider ContextProvider { get; set; }
 
         protected override object Invoke(MethodInfo targetMethod, object[] args)
         {
-            var result = ProxyHelper<TService, TPolicyProvider>.Invoke(Service, PolicyProvider, targetMethod, args);
+            var result = ProxyHelper<TService, TPolicyProvider>.Invoke(Service, PolicyProvider, ContextProvider, targetMethod, args);
 
             return !targetMethod.IsAsyncWithReturnParameter() 
                 ? result 

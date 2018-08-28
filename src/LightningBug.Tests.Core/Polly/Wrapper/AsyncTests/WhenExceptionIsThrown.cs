@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using System.Threading.Tasks;
+using LightningBug.Polly.Providers;
 using Shouldly;
 using Xunit;
 
@@ -27,7 +28,7 @@ namespace LightningBug.Polly.Wrapper.AsyncTests
         {
             var impl = new Throw();
             var provider = new NullPolicyProvider();
-            var proxy = PollyWrapper<IThrow>.Decorate(impl, provider);
+            var proxy = PollyWrapper<IThrow>.Decorate(impl, provider, new ContextProvider());
             await Assert.ThrowsAsync<ApplicationException>(async () => await proxy.ThrowException());
         }
 
@@ -36,7 +37,7 @@ namespace LightningBug.Polly.Wrapper.AsyncTests
         {
             var impl = new Throw();
             var provider = new NoOpPolicyProvider();
-            var proxy = PollyWrapper<IThrow>.Decorate(impl, provider);
+            var proxy = PollyWrapper<IThrow>.Decorate(impl, provider, new ContextProvider());
             try
             {
                 await proxy.ThrowException();
@@ -54,7 +55,7 @@ namespace LightningBug.Polly.Wrapper.AsyncTests
             var impl = new Throw();
             var executed = false;
             var provider = new CallbackPolicyProvider((method, arguments) => executed = true);
-            var proxy = PollyWrapper<IThrow>.Decorate(impl, provider);
+            var proxy = PollyWrapper<IThrow>.Decorate(impl, provider, new ContextProvider());
             try
             {
                 await proxy.ThrowException();

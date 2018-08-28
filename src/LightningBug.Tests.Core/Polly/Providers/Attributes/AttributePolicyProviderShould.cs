@@ -41,6 +41,11 @@ namespace LightningBug.Polly.Providers.Attributes
         {
         }
 
+        [InheritedTestPolicy]
+        public void UsesInheritedAttribute()
+        {
+        }
+
         public class TestPolicy : Policy
         {
             public string Name { get; }
@@ -77,6 +82,10 @@ namespace LightningBug.Polly.Providers.Attributes
             {
                 return Order;
             }
+        }
+
+        public class InheritedTestPolicyAttribute : TestPolicyAttribute
+        {
         }
 
         public class TestAttributePolicyProvider : AttributePolicyProvider
@@ -146,6 +155,15 @@ namespace LightningBug.Polly.Providers.Attributes
             var policies = policyWrap.GetPolicies().OfType<TestPolicy>().ToArray();
             policies.Select(p => p.Order).ShouldBe(new[] {0, 0});
             policies.Select(p => p.Name).ShouldBe(new[] { "First", "Second" });
+        }
+
+        [Fact]
+        public void ReturnsPolicyWhenAttributeIsInherited()
+        {
+            var mi = typeof(AttributePolicyProviderShould).GetMethod(nameof(UsesInheritedAttribute));
+            var sut = new TestAttributePolicyProvider();
+            var policy = sut.GetSyncPolicy(mi);
+            policy.ShouldBeOfType<TestPolicy>();
         }
     }
 }

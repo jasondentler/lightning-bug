@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\LightningBug.Polly.Wrapper\LightningBug.Polly.csproj" />
+    <ProjectReference Include="..\LightningBug.Polly\LightningBug.Polly.csproj" />
     <ProjectReference Include="..\LightningBug\LightningBug.csproj" />
   </ItemGroup>
 

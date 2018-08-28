@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using LightningBug.Polly.Providers;
 using Shouldly;
 using Xunit;
 
@@ -34,7 +35,7 @@ namespace LightningBug.Polly.Wrapper.SyncTests
             var output = new StringWriter();
             var impl = new Service(output);
             var provider = new NullPolicyProvider();
-            var proxy = PollyWrapper<IService>.Decorate(impl, provider);
+            var proxy = PollyWrapper<IService>.Decorate(impl, provider, new ContextProvider());
             proxy.Say(HelloWorld);
             output.ToString().ShouldBe(HelloWorld);
         }
@@ -45,7 +46,7 @@ namespace LightningBug.Polly.Wrapper.SyncTests
             var output = new StringWriter();
             var impl = new Service(output);
             var provider = new NoOpPolicyProvider();
-            var proxy = PollyWrapper<IService>.Decorate(impl, provider);
+            var proxy = PollyWrapper<IService>.Decorate(impl, provider, new ContextProvider());
             proxy.Say(HelloWorld);
             output.ToString().ShouldBe(HelloWorld);
         }
@@ -57,7 +58,7 @@ namespace LightningBug.Polly.Wrapper.SyncTests
             var impl = new Service(output);
             var executed = false;
             var provider = new CallbackPolicyProvider((method, arguments) => executed = true);
-            var proxy = PollyWrapper<IService>.Decorate(impl, provider);
+            var proxy = PollyWrapper<IService>.Decorate(impl, provider, new ContextProvider());
             proxy.Say(HelloWorld);
             executed.ShouldBeTrue();
         }

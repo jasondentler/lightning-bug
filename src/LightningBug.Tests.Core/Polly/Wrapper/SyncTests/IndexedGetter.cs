@@ -1,4 +1,5 @@
-﻿using Shouldly;
+﻿using LightningBug.Polly.Providers;
+using Shouldly;
 using Xunit;
 
 namespace LightningBug.Polly.Wrapper.SyncTests
@@ -21,8 +22,9 @@ namespace LightningBug.Polly.Wrapper.SyncTests
         public void WithoutPolicy()
         {
             var impl = new Service();
-            var provider = new NullPolicyProvider();
-            var proxy = PollyWrapper<IService>.Decorate(impl, provider);
+            var policyProvider = new NullPolicyProvider();
+            var contextProvider = new ContextProvider();
+            var proxy = PollyWrapper<IService>.Decorate(impl, policyProvider, contextProvider);
             var result = proxy[HelloWorld];
             result.ShouldBe(HelloWorld);
         }
@@ -30,8 +32,9 @@ namespace LightningBug.Polly.Wrapper.SyncTests
         public void WithPolicy()
         {
             var impl = new Service();
-            var provider = new NoOpPolicyProvider();
-            var proxy = PollyWrapper<IService>.Decorate(impl, provider);
+            var policyProvider = new NoOpPolicyProvider();
+            var contextProvider = new ContextProvider();
+            var proxy = PollyWrapper<IService>.Decorate(impl, policyProvider, contextProvider);
             var result = proxy[HelloWorld];
             result.ShouldBe(HelloWorld);
         }
@@ -41,8 +44,9 @@ namespace LightningBug.Polly.Wrapper.SyncTests
         {
             var impl = new Service();
             var executed = false;
-            var provider = new CallbackPolicyProvider((method, arguments) => executed = true);
-            var proxy = PollyWrapper<IService>.Decorate(impl, provider);
+            var policyProvider = new CallbackPolicyProvider((method, arguments) => executed = true);
+            var contextProvider = new ContextProvider();
+            var proxy = PollyWrapper<IService>.Decorate(impl, policyProvider, contextProvider);
             var result = proxy[HelloWorld];
             result.ShouldBe(HelloWorld);
             executed.ShouldBeTrue();
