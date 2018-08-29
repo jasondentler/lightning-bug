@@ -10,6 +10,8 @@
     <PackageProjectUrl>http://lightningbug.jasondentler.com/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/jasondentler/lightning-bug</RepositoryUrl>
     <PackageIconUrl>http://lightningbug.jasondentler.com/images/lightningbug_vector.png</PackageIconUrl>
+    <PackageLicenseUrl>https://github.com/jasondentler/lightning-bug/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <ItemGroup>

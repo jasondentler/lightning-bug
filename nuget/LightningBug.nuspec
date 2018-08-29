@@ -8,7 +8,8 @@
     <owners>JasonDentler</owners>
     <projectUrl>http://lightningbug.jasondentler.com</projectUrl>
     <iconUrl>http://lightningbug.jasondentler.com/images/lightningbug_vector.png</iconUrl>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <licenseUrl>https://github.com/jasondentler/lightning-bug/blob/master/LICENSE</licenseUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>Lightning Bug is a collection of flashy but short-lived bits of code for common tasks.</description>
     <releaseNotes>Reference SQL SMO nuget instead of GAC</releaseNotes>
     <copyright>Copyright 2017 Jason Dentler</copyright>
