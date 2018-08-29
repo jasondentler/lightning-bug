@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -20,39 +21,39 @@ namespace LightningBug.Polly
 
         public static Func<TInstanceType, object[], Task<object>> BuildAsyncDelegate<TInstanceType>(this MethodInfo mi)
         {
-            var returnType = mi.IsVoidAsync() ? typeof(void) : mi.GetAsyncReturnType();
-
-            var parameters = mi.GetParameters();
-
-            var instanceParam = Expression.Parameter(typeof(TInstanceType), "instance");
-
-            var argumentsArray = Expression.Parameter(typeof(object[]), "args");
-            var arguments = GetCallArguments(parameters, instanceParam, argumentsArray);
-
-            var call = Expression.Call(instanceParam, mi, arguments);
-
-            Expression body;
-
-            if (returnType == typeof(void))
-            {
-                body = Expression.Call(null, addReturnValueToAsyncVoid, call);
-            }
-            else
-            {
-                var convert = TaskConversionCache.MakeGenericExpression(returnType);
-                body = Expression.Invoke(convert, call);
-            }
-
-            var lambda = Expression.Lambda<Func<TInstanceType, object[], Task<object>>>(body, instanceParam, argumentsArray);
-
             try
             {
+                var returnType = mi.IsVoidAsync() ? typeof(void) : mi.GetAsyncReturnType();
+
+                var parameters = mi.GetParameters();
+
+                var instanceParam = Expression.Parameter(typeof(TInstanceType), "instance");
+
+                var argumentsArray = Expression.Parameter(typeof(object[]), "args");
+                var arguments = GetCallArguments(parameters, instanceParam, argumentsArray).ToArray();
+
+                var call = GetCall(instanceParam, mi, arguments);
+
+                Expression body;
+
+                if (returnType == typeof(void))
+                {
+                    body = Expression.Call(null, addReturnValueToAsyncVoid, call);
+                }
+                else
+                {
+                    var convert = TaskConversionCache.MakeGenericExpression(returnType);
+                    body = Expression.Invoke(convert, call);
+                }
+
+                var lambda = Expression.Lambda<Func<TInstanceType, object[], Task<object>>>(body, instanceParam, argumentsArray);
+
                 var func = lambda.Compile();
                 return func;
             }
             catch (Exception ex)
             {
-                throw new ApplicationException($"Problem compiling {mi.Name} defined in {mi.DeclaringType.FullName}", ex);
+                throw new ApplicationException($"Problem compiling wrapper for {mi.Name} defined in {mi.DeclaringType.FullName}", ex);
             }
         }
 
@@ -64,29 +65,29 @@ namespace LightningBug.Polly
 
         public static Func<TInstanceType, object[], object> BuildDelegate<TInstanceType>(this MethodInfo mi)
         {
-            var parameters = mi.GetParameters();
-
-            var instanceParam = Expression.Parameter(typeof(TInstanceType), "instance");
-
-            var argumentsArray = Expression.Parameter(typeof(object[]), "args");
-            var arguments = GetCallArguments(parameters, instanceParam, argumentsArray);
-
-            var call = Expression.Call(instanceParam, mi, arguments);
-
-            var body = mi.ReturnType != typeof(void)
-                ? (Expression) call
-                : Expression.Block(call, Expression.Constant(null, typeof(object)));
-
-            var lambda = Expression.Lambda<Func<TInstanceType, object[], object>>(body, instanceParam, argumentsArray);
-
             try
             {
+                var parameters = mi.GetParameters();
+
+                var instanceParam = Expression.Parameter(typeof(TInstanceType), "instance");
+
+                var argumentsArray = Expression.Parameter(typeof(object[]), "args");
+                var arguments = GetCallArguments(parameters, instanceParam, argumentsArray);
+
+                var call = Expression.Call(instanceParam, mi, arguments);
+
+                var body = mi.ReturnType != typeof(void)
+                    ? (Expression) call
+                    : Expression.Block(call, Expression.Constant(null, typeof(object)));
+
+                var lambda = Expression.Lambda<Func<TInstanceType, object[], object>>(body, instanceParam, argumentsArray);
+
                 var func = lambda.Compile();
                 return func;
             }
             catch (Exception ex)
             {
-                throw new ApplicationException($"Problem compiling {mi.Name} defined in {mi.DeclaringType.FullName}", ex);
+                throw new ApplicationException($"Problem compiling wrapper {mi.Name} defined in {mi.DeclaringType.FullName}", ex);
             }
         }
 
@@ -98,6 +99,22 @@ namespace LightningBug.Polly
                 var cast = Expression.Convert(argument, parameters[i].ParameterType);
                 yield return cast;
             }
+        }
+
+        private static MethodCallExpression GetCall(ParameterExpression instanceParam, MethodInfo mi, IEnumerable<Expression> arguments)
+        {
+            if (mi.IsGenericMethodDefinition)
+            {
+                var genericArguments = mi.GetGenericArguments();
+                return Expression.Call(instanceParam, mi, arguments);
+            }
+            if (mi.ContainsGenericParameters)
+            {
+                var genericArguments = mi.GetGenericArguments();
+                return Expression.Call(instanceParam, mi, arguments);
+            }
+
+            return Expression.Call(instanceParam, mi, arguments);
         }
 
     }

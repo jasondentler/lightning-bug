@@ -2,33 +2,33 @@
 using Shouldly;
 using Xunit;
 
-namespace LightningBug.Polly.Wrapper.SyncTests
+namespace LightningBug.Polly.Wrapper.SyncTests.OpenGenericMethods
 {
-    public class ReturnValueWithArguments
+    public class ReturnValueWithoutArguments
     {
         public const string HelloWorld = "Hello World!";
 
         public interface IService
         {
-            string Echo(string message);
+            T EchoHelloWorld<T>() where T : class;
         }
 
         public class Service : IService
         {
-            public string Echo(string message)
+            public T EchoHelloWorld<T>() where T : class
             {
-                return message;
+                return HelloWorld as T;
             }
 
         }
-        
+
         [Fact]
         public void WithoutPolicy()
         {
             var impl = new Service();
             var provider = new NullPolicyProvider();
             var proxy = PollyWrapper<IService>.Decorate(impl, provider, new ContextProvider());
-            var result = proxy.Echo(HelloWorld);
+            var result = proxy.EchoHelloWorld<string>();
             result.ShouldBe(HelloWorld);
         }
 
@@ -38,7 +38,7 @@ namespace LightningBug.Polly.Wrapper.SyncTests
             var impl = new Service();
             var provider = new NoOpPolicyProvider();
             var proxy = PollyWrapper<IService>.Decorate(impl, provider, new ContextProvider());
-            var result = proxy.Echo(HelloWorld);
+            var result = proxy.EchoHelloWorld<string>();
             result.ShouldBe(HelloWorld);
         }
 
@@ -49,7 +49,7 @@ namespace LightningBug.Polly.Wrapper.SyncTests
             var executed = false;
             var provider = new CallbackPolicyProvider((method, arguments) => executed = true);
             var proxy = PollyWrapper<IService>.Decorate(impl, provider, new ContextProvider());
-            var result = proxy.Echo(HelloWorld);
+            var result = proxy.EchoHelloWorld<string>();
             executed.ShouldBeTrue();
         }
     }

@@ -84,12 +84,29 @@ namespace LightningBug.Polly.Providers.Attributes
             }
         }
 
+        public class SpecificAttributePolicyProvider : IAttributePolicyProvider
+        {
+            public ISyncPolicy GetSyncPolicy(MethodInfo methodInfo, PolicyAttribute attribute)
+            {
+                return null;
+            }
+
+            public IAsyncPolicy GetAsyncPolicy(MethodInfo methodInfo, PolicyAttribute attribute)
+            {
+                return null;
+            }
+        }
+
         public class InheritedTestPolicyAttribute : TestPolicyAttribute
         {
         }
 
         public class TestAttributePolicyProvider : AttributePolicyProvider
         {
+            public TestAttributePolicyProvider() : base(new SpecificAttributePolicyProvider())
+            {
+            }
+
             protected override ISyncPolicy GetSyncPolicy(MethodInfo methodInfo, PolicyAttribute attribute)
             {
                 var testAttribute = (TestPolicyAttribute) attribute;

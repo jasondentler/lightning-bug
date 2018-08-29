@@ -1,8 +1,9 @@
-﻿using LightningBug.Polly.Providers;
+﻿using System.Threading.Tasks;
+using LightningBug.Polly.Providers;
 using Shouldly;
 using Xunit;
 
-namespace LightningBug.Polly.Wrapper.SyncTests
+namespace LightningBug.Polly.Wrapper.AsyncTests.OpenGenericMethods
 {
     public class ReturnValueWithArguments
     {
@@ -10,46 +11,46 @@ namespace LightningBug.Polly.Wrapper.SyncTests
 
         public interface IService
         {
-            string Echo(string message);
+            Task<T> EchoAsync<T>(T message);
         }
 
         public class Service : IService
         {
-            public string Echo(string message)
+            public Task<T> EchoAsync<T>(T message)
             {
-                return message;
+                return Task.Run(() => message);
             }
 
         }
-        
+
         [Fact]
-        public void WithoutPolicy()
+        public async Task WithoutPolicy()
         {
             var impl = new Service();
             var provider = new NullPolicyProvider();
             var proxy = PollyWrapper<IService>.Decorate(impl, provider, new ContextProvider());
-            var result = proxy.Echo(HelloWorld);
+            var result = await proxy.EchoAsync(HelloWorld);
             result.ShouldBe(HelloWorld);
         }
 
         [Fact]
-        public void WithPolicy()
+        public async Task WithPolicy()
         {
             var impl = new Service();
             var provider = new NoOpPolicyProvider();
             var proxy = PollyWrapper<IService>.Decorate(impl, provider, new ContextProvider());
-            var result = proxy.Echo(HelloWorld);
+            var result = await proxy.EchoAsync(HelloWorld);
             result.ShouldBe(HelloWorld);
         }
 
         [Fact]
-        public void ExecutesPolicy()
+        public async Task ExecutesPolicy()
         {
             var impl = new Service();
             var executed = false;
             var provider = new CallbackPolicyProvider((method, arguments) => executed = true);
             var proxy = PollyWrapper<IService>.Decorate(impl, provider, new ContextProvider());
-            var result = proxy.Echo(HelloWorld);
+            var result = await proxy.EchoAsync(HelloWorld);
             executed.ShouldBeTrue();
         }
     }

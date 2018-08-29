@@ -2,7 +2,7 @@
 using Shouldly;
 using Xunit;
 
-namespace LightningBug.Polly.Wrapper.SyncTests
+namespace LightningBug.Polly.Wrapper.SyncTests.OpenGenericMethods
 {
     public class ReturnValueWithArguments
     {
@@ -10,18 +10,17 @@ namespace LightningBug.Polly.Wrapper.SyncTests
 
         public interface IService
         {
-            string Echo(string message);
+            T Echo<T>(T message);
         }
 
         public class Service : IService
         {
-            public string Echo(string message)
+            public T Echo<T>(T message)
             {
                 return message;
             }
-
         }
-        
+
         [Fact]
         public void WithoutPolicy()
         {

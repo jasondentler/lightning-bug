@@ -1,55 +1,65 @@
-﻿using LightningBug.Polly.Providers;
+﻿using System.IO;
+using LightningBug.Polly.Providers;
 using Shouldly;
 using Xunit;
 
-namespace LightningBug.Polly.Wrapper.SyncTests
+namespace LightningBug.Polly.Wrapper.SyncTests.OpenGenericMethods
 {
-    public class ReturnValueWithArguments
+    public class VoidMethodWithArguments
     {
         public const string HelloWorld = "Hello World!";
 
         public interface IService
         {
-            string Echo(string message);
+            void Say<T>(T message);
         }
 
         public class Service : IService
         {
-            public string Echo(string message)
+            private readonly TextWriter _output;
+
+            public Service(TextWriter output)
             {
-                return message;
+                _output = output;
             }
 
+            public void Say<T>(T message)
+            {
+                _output.Write(message);
+            }
         }
-        
+
         [Fact]
         public void WithoutPolicy()
         {
-            var impl = new Service();
+            var output = new StringWriter();
+            var impl = new Service(output);
             var provider = new NullPolicyProvider();
             var proxy = PollyWrapper<IService>.Decorate(impl, provider, new ContextProvider());
-            var result = proxy.Echo(HelloWorld);
-            result.ShouldBe(HelloWorld);
+            proxy.Say(HelloWorld);
+            output.ToString().ShouldBe(HelloWorld);
         }
 
         [Fact]
         public void WithPolicy()
         {
-            var impl = new Service();
+            var output = new StringWriter();
+            var impl = new Service(output);
             var provider = new NoOpPolicyProvider();
             var proxy = PollyWrapper<IService>.Decorate(impl, provider, new ContextProvider());
-            var result = proxy.Echo(HelloWorld);
-            result.ShouldBe(HelloWorld);
+            proxy.Say(HelloWorld);
+            output.ToString().ShouldBe(HelloWorld);
         }
 
         [Fact]
         public void ExecutesPolicy()
         {
-            var impl = new Service();
+            var output = new StringWriter();
+            var impl = new Service(output);
             var executed = false;
             var provider = new CallbackPolicyProvider((method, arguments) => executed = true);
             var proxy = PollyWrapper<IService>.Decorate(impl, provider, new ContextProvider());
-            var result = proxy.Echo(HelloWorld);
+            proxy.Say(HelloWorld);
             executed.ShouldBeTrue();
         }
     }
