@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Polly;
@@ -28,6 +29,11 @@ namespace LightningBug.Polly.Providers.Attributes
 
         public AttributePolicyProvider(params IAttributePolicyProvider[] attributePolicyProviders)
         {
+            if (attributePolicyProviders == null) throw new ArgumentNullException(nameof(attributePolicyProviders));
+
+            if (!attributePolicyProviders.Any())
+                throw new ArgumentException($"At least one {nameof(IAttributePolicyProvider)} is required.");
+
             _attributePolicyProviders = attributePolicyProviders;
         }
 
@@ -73,6 +79,7 @@ namespace LightningBug.Polly.Providers.Attributes
         {
             var policies = _attributePolicyProviders
                 .Select(provider => provider.GetSyncPolicy(methodInfo, attribute))
+                .Where(policy => policy != null)
                 .ToArray();
 
             if (!policies.Any()) return null;
@@ -85,6 +92,7 @@ namespace LightningBug.Polly.Providers.Attributes
         {
             var policies = _attributePolicyProviders
                 .Select(provider => provider.GetAsyncPolicy(methodInfo, attribute))
+                .Where(policy => policy != null)
                 .ToArray();
 
             if (!policies.Any()) return null;
