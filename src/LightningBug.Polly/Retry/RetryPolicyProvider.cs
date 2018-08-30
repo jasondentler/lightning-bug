@@ -16,27 +16,27 @@ namespace LightningBug.Polly.Retry
     {
     }
 
-    public class RetryPolicyProvider<TException, TAttribute> : AttributePolicyProvider<TAttribute> 
+    public class RetryPolicyProvider<TException, TAttribute> : AttributePolicyProviderBase<TAttribute> 
         where TException : Exception
         where TAttribute : RetryAttribute
     {
-        public override ISyncPolicy GetSyncPolicy(MethodInfo methodInfo, TAttribute attribute)
+        public override ISyncPolicy GetSyncPolicy(CallContextBase context, TAttribute attribute)
         {
             return Policy
                 .Handle<TException>(HandlesException)
                 .OrInner<TException>(HandlesInnerException)
                 .Retry(attribute.MaxRetries,
-                    (exception, retryNumber, context) => OnRetry(exception, retryNumber, context));
+                    (exception, retryNumber, ctx) => OnRetry(exception, retryNumber, ctx));
         }
 
 
-        public override IAsyncPolicy GetAsyncPolicy(MethodInfo methodInfo, TAttribute attribute)
+        public override IAsyncPolicy GetAsyncPolicy(CallContextBase context, TAttribute attribute)
         {
             return Policy
                 .Handle<TException>(HandlesException)
                 .OrInner<TException>(HandlesInnerException)
                 .RetryAsync(attribute.MaxRetries,
-                    (exception, retryNumber, context) => OnRetry(exception, retryNumber, context));
+                    (exception, retryNumber, ctx) => OnRetry(exception, retryNumber, ctx));
         }
 
         private void OnRetry(Exception exception, int retryNumber, Context context)

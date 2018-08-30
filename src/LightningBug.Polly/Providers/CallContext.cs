@@ -7,13 +7,16 @@ namespace LightningBug.Polly.Providers
 {
     public class CallContext : CallContextBase
     {
-
+        public override Type ServiceType { get; }
+        public override object Instance { get; }
         public override MethodInfo Method { get; }
         public override IDictionary<string, object> Arguments { get; }
         public override IDictionary<string, Type> ParameterTypes { get; }
 
-        public CallContext(MethodInfo methodInfo, object[] args)
+        public CallContext(Type serviceType, object instance, MethodInfo methodInfo, object[] args)
         {
+            ServiceType = serviceType;
+            Instance = instance;
             Method = methodInfo;
 
             ParameterTypes = methodInfo.GetParameters()

@@ -15,27 +15,27 @@ namespace LightningBug.Polly.Retry
     {
     }
 
-    public class WaitAndRetryPolicyProvider<TException, TAttribute> : AttributePolicyProvider<TAttribute>
+    public class WaitAndRetryPolicyProvider<TException, TAttribute> : AttributePolicyProviderBase<TAttribute>
         where TException : Exception
         where TAttribute : WaitAndRetryAttribute
     {
-        public override ISyncPolicy GetSyncPolicy(MethodInfo methodInfo, TAttribute attribute)
+        public override ISyncPolicy GetSyncPolicy(CallContextBase context, TAttribute attribute)
         {
             return Policy
                 .Handle<TException>(HandlesException)
                 .OrInner<TException>(HandlesInnerException)
                 .WaitAndRetry(attribute.Retries,
-                    (exception, timeSpan, context) => OnRetry(exception, timeSpan, context));
+                    (exception, timeSpan, ctx) => OnRetry(exception, timeSpan, ctx));
         }
 
 
-        public override IAsyncPolicy GetAsyncPolicy(MethodInfo methodInfo, TAttribute attribute)
+        public override IAsyncPolicy GetAsyncPolicy(CallContextBase context, TAttribute attribute)
         {
             return Policy
                 .Handle<TException>(HandlesException)
                 .OrInner<TException>(HandlesInnerException)
                 .WaitAndRetryAsync(attribute.Retries,
-                    (exception, timeSpan, context) => OnRetry(exception, timeSpan, context));
+                    (exception, timeSpan, ctx) => OnRetry(exception, timeSpan, ctx));
         }
 
         private void OnRetry(Exception exception, TimeSpan timeSpan, Context context)

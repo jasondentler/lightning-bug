@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using LightningBug.Polly.Providers;
 using Moq;
 using Polly.Caching;
 using Shouldly;
@@ -43,8 +44,9 @@ namespace LightningBug.Polly.Caching
             var asyncCacheProvider = new Mock<IAsyncCacheProvider>();
             var sut = new AttributeCachingPolicyProvider(syncCacheProvider.Object, asyncCacheProvider.Object);
             var method = typeof(ITestInterface).GetMethod("SingleCacheEntry");
+            var context = new CallContext(typeof(ITestInterface), new TestInterfaceImplementation(), method, new object[0]);
             var attribute = method.GetCustomAttributes().OfType<CacheAttribute>().Single();
-            var policy = sut.GetAsyncPolicy(method, attribute);
+            var policy = sut.GetAsyncPolicy(context, attribute);
             policy.ShouldNotBeNull();
         }
 
@@ -55,8 +57,9 @@ namespace LightningBug.Polly.Caching
             var asyncCacheProvider = new Mock<IAsyncCacheProvider>();
             var sut = new AttributeCachingPolicyProvider(syncCacheProvider.Object, asyncCacheProvider.Object);
             var method = typeof(ITestInterface).GetMethod("CacheEntry");
+            var context = new CallContext(typeof(ITestInterface), new TestInterfaceImplementation(), method, new object[] {0});
             var attribute = method.GetCustomAttributes().OfType<CacheAttribute>().Single();
-            var policy = sut.GetAsyncPolicy(method, attribute);
+            var policy = sut.GetAsyncPolicy(context, attribute);
             policy.ShouldNotBeNull();
         }
 

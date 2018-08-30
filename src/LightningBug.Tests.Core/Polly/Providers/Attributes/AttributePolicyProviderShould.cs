@@ -86,12 +86,12 @@ namespace LightningBug.Polly.Providers.Attributes
 
         public class SpecificAttributePolicyProvider : IAttributePolicyProvider
         {
-            public ISyncPolicy GetSyncPolicy(MethodInfo methodInfo, PolicyAttribute attribute)
+            public ISyncPolicy GetSyncPolicy(CallContextBase context, PolicyAttribute attribute)
             {
                 return null;
             }
 
-            public IAsyncPolicy GetAsyncPolicy(MethodInfo methodInfo, PolicyAttribute attribute)
+            public IAsyncPolicy GetAsyncPolicy(CallContextBase context, PolicyAttribute attribute)
             {
                 return null;
             }
@@ -107,14 +107,14 @@ namespace LightningBug.Polly.Providers.Attributes
             {
             }
 
-            protected override ISyncPolicy GetSyncPolicy(MethodInfo methodInfo, PolicyAttribute attribute)
+            protected override ISyncPolicy GetSyncPolicy(CallContextBase context, PolicyAttribute attribute)
             {
                 var testAttribute = (TestPolicyAttribute) attribute;
                 var policy = new TestPolicy(testAttribute.Name, testAttribute.Order);
                 return policy;
             }
 
-            protected override IAsyncPolicy GetAsyncPolicy(MethodInfo methodInfo, PolicyAttribute attribute)
+            protected override IAsyncPolicy GetAsyncPolicy(CallContextBase context, PolicyAttribute attribute)
             {
                 var testAttribute = (TestPolicyAttribute)attribute;
                 var policy = new TestPolicy(testAttribute.Name, testAttribute.Order, false);
@@ -127,13 +127,18 @@ namespace LightningBug.Polly.Providers.Attributes
             }
 
         }
-        
+
+        private CallContextBase GetTestContext(MethodInfo mi)
+        {
+            return new CallContext(this.GetType(), this, mi, new object[0]);
+        }
+
         [Fact]
         public void ReturnNullWhenMethodHasNoAttribute()
         {
             var mi = typeof(AttributePolicyProviderShould).GetMethod(nameof(NoAttribute));
             var sut = new TestAttributePolicyProvider();
-            var policy = sut.GetSyncPolicy(mi);
+            var policy = sut.GetSyncPolicy(GetTestContext(mi));
             policy.ShouldBeNull();
         }
 
@@ -142,7 +147,7 @@ namespace LightningBug.Polly.Providers.Attributes
         {
             var mi = typeof(AttributePolicyProviderShould).GetMethod(nameof(NoAttribute));
             var sut = new TestAttributePolicyProvider();
-            var policy = sut.GetSyncPolicy(mi);
+            var policy = sut.GetSyncPolicy(GetTestContext(mi));
             policy.ShouldBeNull();
         }
 
@@ -151,7 +156,7 @@ namespace LightningBug.Polly.Providers.Attributes
         {
             var mi = typeof(AttributePolicyProviderShould).GetMethod(nameof(SortedPolicyAttributes));
             var sut = new TestAttributePolicyProvider();
-            var policy = sut.GetSyncPolicy(mi);
+            var policy = sut.GetSyncPolicy(GetTestContext(mi));
             policy.ShouldBeOfType<PolicyWrap>();
 
             var policyWrap = policy as PolicyWrap;
@@ -165,7 +170,7 @@ namespace LightningBug.Polly.Providers.Attributes
         {
             var mi = typeof(AttributePolicyProviderShould).GetMethod(nameof(NamedPolicyAttributes));
             var sut = new TestAttributePolicyProvider();
-            var policy = sut.GetSyncPolicy(mi);
+            var policy = sut.GetSyncPolicy(GetTestContext(mi));
             policy.ShouldBeOfType<PolicyWrap>();
 
             var policyWrap = policy as PolicyWrap;
@@ -179,7 +184,7 @@ namespace LightningBug.Polly.Providers.Attributes
         {
             var mi = typeof(AttributePolicyProviderShould).GetMethod(nameof(UsesInheritedAttribute));
             var sut = new TestAttributePolicyProvider();
-            var policy = sut.GetSyncPolicy(mi);
+            var policy = sut.GetSyncPolicy(GetTestContext(mi));
             policy.ShouldBeOfType<TestPolicy>();
         }
     }

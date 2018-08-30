@@ -6,23 +6,6 @@ using Polly;
 
 namespace LightningBug.Polly.Providers.Attributes
 {
-    public abstract class AttributePolicyProvider<TAttribute> : IAttributePolicyProvider where TAttribute : PolicyAttribute
-    {
-        public abstract ISyncPolicy GetSyncPolicy(MethodInfo methodInfo, TAttribute attribute);
-        public abstract IAsyncPolicy GetAsyncPolicy(MethodInfo methodInfo, TAttribute attribute);
-        public virtual ISyncPolicy GetSyncPolicy(MethodInfo methodInfo, PolicyAttribute attribute)
-        {
-            if (attribute is TAttribute) return GetSyncPolicy(methodInfo, (TAttribute) attribute);
-            return null;
-        }
-
-        public virtual IAsyncPolicy GetAsyncPolicy(MethodInfo methodInfo, PolicyAttribute attribute)
-        {
-            if (attribute is TAttribute) return GetAsyncPolicy(methodInfo, (TAttribute)attribute);
-            return null;
-        }
-    }
-
     public class AttributePolicyProvider : IPolicyProvider
     {
         private readonly IAttributePolicyProvider[] _attributePolicyProviders;
@@ -37,12 +20,13 @@ namespace LightningBug.Polly.Providers.Attributes
             _attributePolicyProviders = attributePolicyProviders;
         }
 
-        public ISyncPolicy GetSyncPolicy(MethodInfo methodInfo)
+        public ISyncPolicy GetSyncPolicy(CallContextBase context)
         {
+            var methodInfo = context.Method;
             var attributes = methodInfo.GetCustomAttributes<PolicyAttribute>();
             var policies = attributes
                 .OrderBy(attribute => attribute.GetOrder())
-                .Select(attribute => GetSyncPolicy(methodInfo, attribute))
+                .Select(attribute => GetSyncPolicy(context, attribute))
                 .Where(policy => policy != null)
                 .ToArray();
 
@@ -55,14 +39,15 @@ namespace LightningBug.Polly.Providers.Attributes
             return Policy.Wrap(policies);
         }
 
-        public IAsyncPolicy GetAsyncPolicy(MethodInfo methodInfo)
+        public IAsyncPolicy GetAsyncPolicy(CallContextBase context)
         {
+            var methodInfo = context.Method;
             var attributes = methodInfo.GetCustomAttributes<PolicyAttribute>();
             var policies = attributes
                 .GroupBy(attribute => attribute.GetOrder())
                 .OrderBy(g => g.Key) // Always use the specified order, if there is one
                 .SelectMany(CustomSort) // Then sort to break the ties
-                .Select(attribute => GetAsyncPolicy(methodInfo, attribute))
+                .Select(attribute => GetAsyncPolicy(context, attribute))
                 .Where(policy => policy != null)
                 .ToArray();
 
@@ -75,10 +60,10 @@ namespace LightningBug.Polly.Providers.Attributes
             return Policy.WrapAsync(policies);
         }
 
-        protected virtual ISyncPolicy GetSyncPolicy(MethodInfo methodInfo, PolicyAttribute attribute)
+        protected virtual ISyncPolicy GetSyncPolicy(CallContextBase context, PolicyAttribute attribute)
         {
             var policies = _attributePolicyProviders
-                .Select(provider => provider.GetSyncPolicy(methodInfo, attribute))
+                .Select(provider => provider.GetSyncPolicy(context, attribute))
                 .Where(policy => policy != null)
                 .ToArray();
 
@@ -88,10 +73,10 @@ namespace LightningBug.Polly.Providers.Attributes
             return Policy.Wrap(policies);
         }
 
-        protected virtual IAsyncPolicy GetAsyncPolicy(MethodInfo methodInfo, PolicyAttribute attribute)
+        protected virtual IAsyncPolicy GetAsyncPolicy(CallContextBase context, PolicyAttribute attribute)
         {
             var policies = _attributePolicyProviders
-                .Select(provider => provider.GetAsyncPolicy(methodInfo, attribute))
+                .Select(provider => provider.GetAsyncPolicy(context, attribute))
                 .Where(policy => policy != null)
                 .ToArray();
 

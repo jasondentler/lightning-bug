@@ -9,6 +9,8 @@ namespace LightningBug.Polly.Providers
     {
         internal const string CallContextKey = "__CALL__CONTEXT__";
 
+        public abstract Type ServiceType { get; }
+        public abstract object Instance { get; }
         public abstract MethodInfo Method { get; }
         public abstract IDictionary<string, object> Arguments { get; }
         public abstract IDictionary<string, Type> ParameterTypes { get; }

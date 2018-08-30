@@ -8,7 +8,7 @@ using Polly.Caching;
 
 namespace LightningBug.Polly.Caching
 {
-    public class AttributeCachingPolicyProvider : AttributePolicyProvider<CacheAttribute>
+    public class AttributeCachingPolicyProvider : AttributePolicyProviderBase<CacheAttribute>
     {
         private readonly ISyncCacheProvider _syncCacheProvider;
         private readonly IAsyncCacheProvider _asyncCacheProvider;
@@ -20,16 +20,18 @@ namespace LightningBug.Polly.Caching
             _asyncCacheProvider = asyncCacheProvider;
         }
 
-        public override ISyncPolicy GetSyncPolicy(MethodInfo methodInfo, CacheAttribute attribute)
+        public override ISyncPolicy GetSyncPolicy(CallContextBase context, CacheAttribute attribute)
         {
+            var methodInfo = context.Method;
             var cacheKeyStrategy = GetCacheKeyStrategy(methodInfo, attribute);
             var ttlStrategy = GetTimeToLiveStrategy(methodInfo, attribute);
 
             return Policy.Cache(_syncCacheProvider, ttlStrategy, cacheKeyStrategy, OnCacheGet, OnCacheMiss, OnCachePut, OnCacheGetError, OnCachePutError);
         }
 
-        public override IAsyncPolicy GetAsyncPolicy(MethodInfo methodInfo, CacheAttribute attribute)
+        public override IAsyncPolicy GetAsyncPolicy(CallContextBase context, CacheAttribute attribute)
         {
+            var methodInfo = context.Method;
             var cacheKeyStrategy = GetCacheKeyStrategy(methodInfo, attribute);
             var ttlStrategy = GetTimeToLiveStrategy(methodInfo, attribute);
 

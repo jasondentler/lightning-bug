@@ -6,12 +6,12 @@ namespace LightningBug.Polly.Wrapper
 {
     public class NullPolicyProvider : IPolicyProvider
     {
-        public ISyncPolicy GetSyncPolicy(MethodInfo methodInfo)
+        public ISyncPolicy GetSyncPolicy(CallContextBase context)
         {
             return null;
         }
 
-        public IAsyncPolicy GetAsyncPolicy(MethodInfo methodInfo)
+        public IAsyncPolicy GetAsyncPolicy(CallContextBase context)
         {
             return null;
         }

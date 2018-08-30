@@ -31,7 +31,7 @@ namespace LightningBug.Polly.Wrapper
         }
 
 
-        public ISyncPolicy GetSyncPolicy(MethodInfo methodInfo)
+        public ISyncPolicy GetSyncPolicy(CallContextBase context)
         {
             var iface = DispatchProxy.Create<ISyncPolicy, Proxy<ISyncPolicy>>();
             var proxy = iface as Proxy<ISyncPolicy>;
@@ -40,7 +40,7 @@ namespace LightningBug.Polly.Wrapper
             return iface;
         }
 
-        public IAsyncPolicy GetAsyncPolicy(MethodInfo methodInfo)
+        public IAsyncPolicy GetAsyncPolicy(CallContextBase context)
         {
             var iface = DispatchProxy.Create<IAsyncPolicy, Proxy<IAsyncPolicy>>();
             var proxy = iface as Proxy<IAsyncPolicy>;

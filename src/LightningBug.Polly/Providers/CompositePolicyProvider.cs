@@ -13,20 +13,20 @@ namespace LightningBug.Polly.Providers
             _providers = providers;
         }
 
-        public ISyncPolicy GetSyncPolicy(MethodInfo methodInfo)
+        public ISyncPolicy GetSyncPolicy(CallContextBase context)
         {
             var policies = _providers
-                .Select(policyProvider => policyProvider.GetSyncPolicy(methodInfo))
+                .Select(policyProvider => policyProvider.GetSyncPolicy(context))
                 .Where(policy => policy != null)
                 .ToArray();
 
             return Policy.Wrap(policies);
         }
 
-        public IAsyncPolicy GetAsyncPolicy(MethodInfo methodInfo)
+        public IAsyncPolicy GetAsyncPolicy(CallContextBase context)
         {
             var policies = _providers
-                .Select(policyProvider => policyProvider.GetAsyncPolicy(methodInfo))
+                .Select(policyProvider => policyProvider.GetAsyncPolicy(context))
                 .Where(policy => policy != null)
                 .ToArray();
 

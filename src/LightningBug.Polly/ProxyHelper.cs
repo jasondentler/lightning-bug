@@ -65,22 +65,22 @@ namespace LightningBug.Polly
 
         private static object Get(TService service, TPolicyProvider policyProvider, MethodInfo methodInfo, IContextProvider contextProvider)
         {
-            return Execute(() => GettersCache<TService>.Get(service, methodInfo), methodInfo, new object[0],  policyProvider, contextProvider);
+            return Execute(() => GettersCache<TService>.Get(service, methodInfo), service, methodInfo, new object[0],  policyProvider, contextProvider);
         }
 
         private static object Get(TService service, TPolicyProvider policyProvider, MethodInfo methodInfo, object[] indexParameters, IContextProvider contextProvider)
         {
-            return Execute(() => IndexedGettersCache<TService>.Get(service, methodInfo, indexParameters), methodInfo, indexParameters, policyProvider, contextProvider);
+            return Execute(() => IndexedGettersCache<TService>.Get(service, methodInfo, indexParameters), service, methodInfo, indexParameters, policyProvider, contextProvider);
         }
 
         private static void Set(TService service, TPolicyProvider policyProvider, MethodInfo methodInfo, object value, IContextProvider contextProvider)
         {
-            Execute(() => SettersCache<TService>.Set(service, methodInfo, value), methodInfo, new []{value}, policyProvider, contextProvider);
+            Execute(() => SettersCache<TService>.Set(service, methodInfo, value), service, methodInfo, new []{value}, policyProvider, contextProvider);
         }
 
         private static void Set(TService service, TPolicyProvider policyProvider, MethodInfo methodInfo, object[] indexParameters, object value, IContextProvider contextProvider)
         {
-            Execute(() => IndexedSettersCache<TService>.Set(service, methodInfo, indexParameters, value), methodInfo, indexParameters.Concat(new []{value}).ToArray(), policyProvider, contextProvider);
+            Execute(() => IndexedSettersCache<TService>.Set(service, methodInfo, indexParameters, value), service, methodInfo, indexParameters.Concat(new []{value}).ToArray(), policyProvider, contextProvider);
         }
 
         private static object Call(
@@ -91,7 +91,7 @@ namespace LightningBug.Polly
             IContextProvider contextProvider)
         {
             var cb = new Func<object>(() => SyncMethodCache<TService>.Call(service, methodInfo, args));
-            return Execute(cb, methodInfo, args, policyProvider, contextProvider);
+            return Execute(cb, service, methodInfo, args, policyProvider, contextProvider);
         }
 
         private static async Task<object> CallAsync(
@@ -102,12 +102,13 @@ namespace LightningBug.Polly
             IContextProvider contextProvider)
         {
             var cb = new Func<Task<object>>(() => AsyncMethodCache<TService>.Call(service, methodInfo, args));
-            return await ExecuteAsync(cb, methodInfo, args, policyProvider, contextProvider);
+            return await ExecuteAsync(cb, service, methodInfo, args, policyProvider, contextProvider);
         }
 
-        private static void Execute(Action cb, MethodInfo methodInfo, object[] args, TPolicyProvider provider, IContextProvider contextProvider)
+        private static void Execute(Action cb, TService service, MethodInfo methodInfo, object[] args, TPolicyProvider provider, IContextProvider contextProvider)
         {
-            var policy = provider.GetSyncPolicy(methodInfo);
+            var context = contextProvider.GetContext(typeof(TService), service, methodInfo, args);
+            var policy = provider.GetSyncPolicy(context);
 
             if (policy == null)
             {
@@ -115,23 +116,22 @@ namespace LightningBug.Polly
                 return;
             }
 
-            var context = contextProvider.GetContext(methodInfo, args);
             var result = policy.ExecuteAndCapture(ctx => cb(), context);
 
             if (result.Outcome != OutcomeType.Successful)
                 throw new TargetInvocationException(result.FinalException);
         }
 
-        private static object Execute(Func<object> cb, MethodInfo methodInfo, object[] args, TPolicyProvider provider, IContextProvider contextProvider)
+        private static object Execute(Func<object> cb, TService service, MethodInfo methodInfo, object[] args, TPolicyProvider provider, IContextProvider contextProvider)
         {
-            var policy = provider.GetSyncPolicy(methodInfo);
+            var context = contextProvider.GetContext(typeof(TService), service, methodInfo, args);
+            var policy = provider.GetSyncPolicy(context);
 
             if (policy == null)
             {
                 return cb();
             }
 
-            var context = contextProvider.GetContext(methodInfo, args);
             var result = policy.ExecuteAndCapture(ctx => cb(), context);
 
             if (result.Outcome != OutcomeType.Successful)
@@ -140,16 +140,16 @@ namespace LightningBug.Polly
             return result.Result;
         }
 
-        private static async Task<object> ExecuteAsync(Func<Task<object>> cb, MethodInfo methodInfo, object[] args, TPolicyProvider provider, IContextProvider contextProvider)
+        private static async Task<object> ExecuteAsync(Func<Task<object>> cb, TService service, MethodInfo methodInfo, object[] args, TPolicyProvider provider, IContextProvider contextProvider)
         {
-            var policy = provider.GetAsyncPolicy(methodInfo);
+            var context = contextProvider.GetContext(typeof(TService), service, methodInfo, args);
+            var policy = provider.GetAsyncPolicy(context);
 
             if (policy == null)
             {
                 return await cb();
             }
 
-            var context = contextProvider.GetContext(methodInfo, args);
             var result = await policy.ExecuteAndCaptureAsync(ctx => cb(), context);
 
             if (result.Outcome != OutcomeType.Successful)
