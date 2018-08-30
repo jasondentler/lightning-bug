@@ -34,7 +34,7 @@ namespace LightningBug.Polly.Retry
             return Policy
                 .Handle<TException>(HandlesException)
                 .OrInner<TException>(HandlesInnerException)
-                .WaitAndRetry(attribute.Retries,
+                .WaitAndRetryAsync(attribute.Retries,
                     (exception, timeSpan, context) => OnRetry(exception, timeSpan, context));
         }
 
