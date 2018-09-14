@@ -38,15 +38,8 @@ namespace LightningBug.Polly.Wrapper.AsyncTests
             var impl = new Throw();
             var provider = new NoOpPolicyProvider();
             var proxy = PollyWrapper<IThrow>.Decorate(impl, provider, new ContextProvider());
-            try
-            {
-                await proxy.ThrowException();
-            }
-            catch (TargetInvocationException outer)
-            {
-                var inner = outer.InnerException;
-                inner.ShouldBeOfType<ApplicationException>();
-            }
+
+            await Assert.ThrowsAsync<ApplicationException>(async () => await proxy.ThrowException());
         }
 
         [Fact]

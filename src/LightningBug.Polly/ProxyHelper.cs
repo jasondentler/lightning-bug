@@ -116,10 +116,7 @@ namespace LightningBug.Polly
                 return;
             }
 
-            var result = policy.ExecuteAndCapture(ctx => cb(), context);
-
-            if (result.Outcome != OutcomeType.Successful)
-                throw new TargetInvocationException(result.FinalException);
+            policy.Execute(ctx => cb(), context);
         }
 
         private static object Execute(Func<object> cb, TService service, MethodInfo methodInfo, object[] args, TPolicyProvider provider, IContextProvider contextProvider)
@@ -132,12 +129,8 @@ namespace LightningBug.Polly
                 return cb();
             }
 
-            var result = policy.ExecuteAndCapture(ctx => cb(), context);
-
-            if (result.Outcome != OutcomeType.Successful)
-                throw new TargetInvocationException(result.FinalException);
-
-            return result.Result;
+            var result = policy.Execute(ctx => cb(), context);
+            return result;
         }
 
         private static async Task<object> ExecuteAsync(Func<Task<object>> cb, TService service, MethodInfo methodInfo, object[] args, TPolicyProvider provider, IContextProvider contextProvider)
@@ -150,12 +143,8 @@ namespace LightningBug.Polly
                 return await cb();
             }
 
-            var result = await policy.ExecuteAndCaptureAsync(ctx => cb(), context);
-
-            if (result.Outcome != OutcomeType.Successful)
-                throw new TargetInvocationException(result.FinalException);
-
-            return result.Result;
+            var result = await policy.ExecuteAsync(ctx => cb(), context);
+            return result;
         }
     }
 }
