@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using LightningBug.Polly.Providers;
 using LightningBug.Polly.Providers.Attributes;
@@ -8,6 +6,10 @@ using Polly;
 
 namespace LightningBug.Polly.Timeout
 {
+    public class TimeoutAttributePolicyProvider : TimeoutAttributePolicyProvider<TimeoutAttribute>
+    {
+    }
+
     public class TimeoutAttributePolicyProvider<TTimeoutAttribute> : AttributePolicyProviderBase<TTimeoutAttribute> where TTimeoutAttribute : TimeoutAttributeBase
     {
         public override ISyncPolicy GetSyncPolicy(CallContextBase context, TTimeoutAttribute attribute)

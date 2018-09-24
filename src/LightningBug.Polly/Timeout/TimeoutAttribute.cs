@@ -7,7 +7,7 @@ namespace LightningBug.Polly.Timeout
     {
         public virtual TimeSpan Timeout { get; set; }
 
-        public virtual double TimeoutInSections
+        public virtual double TimeoutInSeconds
         {
             get => Timeout.TotalSeconds;
             set => Timeout = TimeSpan.FromSeconds(value);

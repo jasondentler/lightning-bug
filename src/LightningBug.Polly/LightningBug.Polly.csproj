@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.2.0.16</Version>
+    <Version>1.2.0.18</Version>
     <Authors>Jason Dentler</Authors>
     <Description>Decorate a service interface with Polly policies for resilience and transient-fault-handling with patterns such as Retry, Circuit Breaker, Timeout, Bulkhead Isolation, and Fallback</Description>
     <Copyright>(c) 2018 Jason Dentler</Copyright>
