@@ -6,7 +6,7 @@ namespace LightningBug.Polly.CircuitBreaker
     public class CircuitBreakerAttribute : PolicyAttribute, ICircuitBreakerAttribute
     {
 
-        protected CircuitBreakerAttribute()
+        public CircuitBreakerAttribute()
         {
             ExceptionsAllowedBeforeBreaking = 5;
             DurationOfBreakInMinutes = 1;
