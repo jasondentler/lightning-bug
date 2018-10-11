@@ -1,4 +1,5 @@
-﻿using LightningBug.Polly.Providers;
+﻿using System;
+using LightningBug.Polly.Providers;
 
 namespace LightningBug.Polly
 {
@@ -12,9 +13,9 @@ namespace LightningBug.Polly
 
         public PollyWrapperFactory(TServiceImplementation implementation, IPolicyProvider policyProvider, IContextProvider contextProvider)
         {
-            _implementation = implementation;
-            _policyProvider = policyProvider;
-            _contextProvider = contextProvider;
+            _implementation = implementation ?? throw new ArgumentNullException(nameof(implementation));
+            _policyProvider = policyProvider ?? throw new ArgumentNullException(nameof(policyProvider));
+            _contextProvider = contextProvider ?? throw new ArgumentNullException(nameof(contextProvider));
         }
 
         public TService Wrap()

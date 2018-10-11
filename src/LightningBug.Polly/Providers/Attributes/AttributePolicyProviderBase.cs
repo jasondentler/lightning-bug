@@ -2,7 +2,7 @@
 
 namespace LightningBug.Polly.Providers.Attributes
 {
-    public abstract class AttributePolicyProviderBase<TAttribute> : IAttributePolicyProvider where TAttribute : PolicyAttribute
+    public abstract class AttributePolicyProviderBase<TAttribute> : IAttributePolicyProvider<TAttribute> where TAttribute : PolicyAttribute
     {
         public abstract ISyncPolicy GetSyncPolicy(CallContextBase context, TAttribute attribute);
         public abstract IAsyncPolicy GetAsyncPolicy(CallContextBase context, TAttribute attribute);

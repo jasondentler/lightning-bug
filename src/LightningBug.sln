@@ -23,7 +23,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LightningBug.Tests.Core", "LightningBug.Tests.Core\LightningBug.Tests.Core.csproj", "{C8EE7420-3BC8-4538-8ED5-6F1E070583CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightningBug.Polly", "LightningBug.Polly\LightningBug.Polly.csproj", "{84733BCA-863C-46EC-BA3C-3DC5A7FBBD7C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LightningBug.Polly", "LightningBug.Polly\LightningBug.Polly.csproj", "{84733BCA-863C-46EC-BA3C-3DC5A7FBBD7C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightningBug.Polly.SimpleWebAppExample", "examples\polly\LightningBug.Polly.SimpleWebAppExample\LightningBug.Polly.SimpleWebAppExample.csproj", "{218B0B21-9C23-469F-82B2-5101F97FE509}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,10 @@ Global
 		{84733BCA-863C-46EC-BA3C-3DC5A7FBBD7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84733BCA-863C-46EC-BA3C-3DC5A7FBBD7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84733BCA-863C-46EC-BA3C-3DC5A7FBBD7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{218B0B21-9C23-469F-82B2-5101F97FE509}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{218B0B21-9C23-469F-82B2-5101F97FE509}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{218B0B21-9C23-469F-82B2-5101F97FE509}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{218B0B21-9C23-469F-82B2-5101F97FE509}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -29,6 +29,11 @@ namespace LightningBug.Polly
             MethodInfo methodInfo,
             object[] args)
         {
+            if (service == null) throw new ArgumentNullException(nameof(service));
+            if (policyProvider == null) throw new ArgumentNullException(nameof(policyProvider));
+            if (contextProvider == null) throw new ArgumentNullException(nameof(contextProvider));
+            if (methodInfo == null) throw new ArgumentNullException(nameof(methodInfo));
+            if (args == null) throw new ArgumentNullException(nameof(args));
             try
             {
                 if (GettersCache<TService>.Handles(methodInfo))

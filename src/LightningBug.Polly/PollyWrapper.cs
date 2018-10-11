@@ -16,6 +16,9 @@ namespace LightningBug.Polly
         public static TService Decorate<TPolicyProvider>(TService implementation, TPolicyProvider policyProvider, IContextProvider contextProvider)
             where TPolicyProvider : class, IPolicyProvider
         {
+            if (implementation == null) throw new ArgumentNullException(nameof(implementation));
+            if (policyProvider == null) throw new ArgumentNullException(nameof(policyProvider));
+            if (contextProvider == null) throw new ArgumentNullException(nameof(contextProvider));
             var proxyAsInterface = DispatchProxy.Create<TService, Proxy<TService, TPolicyProvider>>();
             var proxyAsWrapper = proxyAsInterface as Proxy<TService, TPolicyProvider> ;
             ProxyHelper<TService, TPolicyProvider>.InitializeProxy(proxyAsWrapper, implementation, policyProvider, contextProvider);
