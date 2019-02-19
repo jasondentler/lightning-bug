@@ -1,9 +1,8 @@
-﻿using Should;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Moq;
-using SharpTestsEx;
+using Shouldly;
 using Xunit;
 
 namespace LightningBug.Data.ETL.Enumerators
@@ -40,7 +39,7 @@ namespace LightningBug.Data.ETL.Enumerators
             var source = new[] {new object(), new object(), new object()};
             var next = new Mock<IChainedEnumerator<object>>();
             var wrapper = new ChainedEnumeratorWrapper<object>(source, next.Object);
-            wrapper.ToArray().Should().Have.SameSequenceAs(source);
+            wrapper.ToArray().ShouldBe(source);
         }
 
         [Fact]
@@ -50,7 +49,7 @@ namespace LightningBug.Data.ETL.Enumerators
             var next = new Mock<IChainedEnumerator<object>>();
             var wrapper = new ChainedEnumeratorWrapper<object>(source, next.Object);
             wrapper.MoveNext();
-            source.Current.ShouldEqual(wrapper.Current);
+            source.Current.ShouldBe(wrapper.Current);
         }
 
         [Fact]
@@ -62,10 +61,10 @@ namespace LightningBug.Data.ETL.Enumerators
 
             var wrapper = new ChainedEnumeratorWrapper<object>(source, next.Object);
 
-            wrapper.MoveNext().Should().Be.True();
-            wrapper.MoveNext().Should().Be.True();
-            wrapper.MoveNext().Should().Be.True();
-            wrapper.MoveNext().Should().Be.False();
+            wrapper.MoveNext().ShouldBeTrue();
+            wrapper.MoveNext().ShouldBeTrue();
+            wrapper.MoveNext().ShouldBeTrue();
+            wrapper.MoveNext().ShouldBeFalse();
         }
 
         [Fact]

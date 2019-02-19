@@ -8,6 +8,7 @@ using Moq;
 using Polly.Caching;
 using Shouldly;
 using Xunit;
+using CallContext = LightningBug.Polly.Providers.CallContext;
 
 namespace LightningBug.Polly.Caching
 {

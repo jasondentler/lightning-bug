@@ -7,7 +7,7 @@ using System.Linq;
 using System.Threading;
 using LightningBug.Data.ETL.Operations;
 using Moq;
-using SharpTestsEx;
+using Shouldly;
 using Xunit;
 
 namespace LightningBug.Data.ETL.Pipelines
@@ -61,7 +61,7 @@ namespace LightningBug.Data.ETL.Pipelines
 
             pipeline.Execute();
 
-            hasExecuted.Should().Be.True();
+            hasExecuted.ShouldBeTrue();
         }
 
         [Fact]
@@ -89,8 +89,8 @@ namespace LightningBug.Data.ETL.Pipelines
 
             pipeline.Execute();
 
-            op1HasExecuted.Should().Be.True();
-            op2HasExecuted.Should().Be.True();
+            op1HasExecuted.ShouldBeTrue();
+            op2HasExecuted.ShouldBeTrue();
         }
 
         [Fact]
@@ -118,8 +118,8 @@ namespace LightningBug.Data.ETL.Pipelines
 
             pipeline.Execute();
 
-            op1HasExecuted.Should().Be.True();
-            op2HasExecuted.Should().Be.True();
+            op1HasExecuted.ShouldBeTrue();
+            op2HasExecuted.ShouldBeTrue();
         }
 
         [Fact]

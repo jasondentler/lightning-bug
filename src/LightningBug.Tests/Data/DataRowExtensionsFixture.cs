@@ -1,5 +1,5 @@
 ﻿using System;
-using Should;
+using Shouldly;
 using Xunit;
 
 namespace LightningBug.Data
@@ -46,9 +46,9 @@ namespace LightningBug.Data
 
             var instance = row.ToInstance<TestClass>();
             instance.ShouldNotBeNull();
-            instance.Id.ShouldEqual(id);
-            instance.Name.ShouldEqual(name);
-            instance.EmployeeId.ShouldEqual(employeeId);
+            instance.Id.ShouldBe(id);
+            instance.Name.ShouldBe(name);
+            instance.EmployeeId.ShouldBe(employeeId);
         }
 
         [Fact]
@@ -66,9 +66,9 @@ namespace LightningBug.Data
             var dependency = new UriBuilder();
             var instance = row.ToInstance(() => new TestClassWithDependency(dependency));
             instance.ShouldNotBeNull();
-            instance.Id.ShouldEqual(id);
-            instance.Name.ShouldEqual(name);
-            instance.EmployeeId.ShouldEqual(employeeId);
+            instance.Id.ShouldBe(id);
+            instance.Name.ShouldBe(name);
+            instance.EmployeeId.ShouldBe(employeeId);
             instance.GetDependency().ShouldBeSameAs(dependency);
         }
 

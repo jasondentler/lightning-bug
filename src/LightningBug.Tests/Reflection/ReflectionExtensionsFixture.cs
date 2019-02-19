@@ -1,5 +1,5 @@
 ﻿using LightningBug.Data;
-using Should;
+using Shouldly;
 using Xunit;
 
 namespace LightningBug.Reflection
@@ -16,7 +16,7 @@ namespace LightningBug.Reflection
             var getter = pi.BuildGetDelegate<TestClass>();
 
             var x = new TestClass() {Value = 2};
-            getter(x).ShouldEqual(2);
+            getter(x).ShouldBe(2);
         }
 
         [Fact]
@@ -27,7 +27,7 @@ namespace LightningBug.Reflection
 
             var x = new TestClass() {Value = 2};
             setter(x, 3);
-            x.Value.ShouldEqual(3);
+            x.Value.ShouldBe(3);
         }
 
     }

@@ -3,10 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2003
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightningBug", "LightningBug\LightningBug.csproj", "{7FDBC7AA-8CA7-4AFE-8BBB-3CC0901FAE95}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightningBug.Tests", "LightningBug.Tests\LightningBug.Tests.csproj", "{0D7E10F4-6CCA-4161-8452-BE7E9080948A}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{7E58FF2B-1BC1-47BC-A13D-4B6B0BE2441F}"
 	ProjectSection(SolutionItems) = preProject
 		..\nuget\LightningBug.nuspec = ..\nuget\LightningBug.nuspec
@@ -19,13 +15,16 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0DA07422-68ED-4C65-B73B-A8EB51EBFFE8}"
 	ProjectSection(SolutionItems) = preProject
 		..\nuget\LightningBug.nuspec = ..\nuget\LightningBug.nuspec
+		..\nugetpack.cmd = ..\nugetpack.cmd
 	EndProjectSection
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LightningBug.Tests.Core", "LightningBug.Tests.Core\LightningBug.Tests.Core.csproj", "{C8EE7420-3BC8-4538-8ED5-6F1E070583CF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LightningBug.Polly", "LightningBug.Polly\LightningBug.Polly.csproj", "{84733BCA-863C-46EC-BA3C-3DC5A7FBBD7C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightningBug.Polly.SimpleWebAppExample", "examples\polly\LightningBug.Polly.SimpleWebAppExample\LightningBug.Polly.SimpleWebAppExample.csproj", "{218B0B21-9C23-469F-82B2-5101F97FE509}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightningBug", "LightningBug\LightningBug.csproj", "{79D6370D-C05E-437E-8912-658F3BE9B494}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightningBug.Tests", "LightningBug.Tests\LightningBug.Tests.csproj", "{D5C2FE24-BD3B-4E56-B99F-E7DC2EDBF432}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,18 +32,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7FDBC7AA-8CA7-4AFE-8BBB-3CC0901FAE95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7FDBC7AA-8CA7-4AFE-8BBB-3CC0901FAE95}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7FDBC7AA-8CA7-4AFE-8BBB-3CC0901FAE95}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7FDBC7AA-8CA7-4AFE-8BBB-3CC0901FAE95}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0D7E10F4-6CCA-4161-8452-BE7E9080948A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0D7E10F4-6CCA-4161-8452-BE7E9080948A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0D7E10F4-6CCA-4161-8452-BE7E9080948A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0D7E10F4-6CCA-4161-8452-BE7E9080948A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C8EE7420-3BC8-4538-8ED5-6F1E070583CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C8EE7420-3BC8-4538-8ED5-6F1E070583CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C8EE7420-3BC8-4538-8ED5-6F1E070583CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C8EE7420-3BC8-4538-8ED5-6F1E070583CF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{84733BCA-863C-46EC-BA3C-3DC5A7FBBD7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{84733BCA-863C-46EC-BA3C-3DC5A7FBBD7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84733BCA-863C-46EC-BA3C-3DC5A7FBBD7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -53,6 +40,14 @@ Global
 		{218B0B21-9C23-469F-82B2-5101F97FE509}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{218B0B21-9C23-469F-82B2-5101F97FE509}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{218B0B21-9C23-469F-82B2-5101F97FE509}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79D6370D-C05E-437E-8912-658F3BE9B494}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79D6370D-C05E-437E-8912-658F3BE9B494}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79D6370D-C05E-437E-8912-658F3BE9B494}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79D6370D-C05E-437E-8912-658F3BE9B494}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5C2FE24-BD3B-4E56-B99F-E7DC2EDBF432}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5C2FE24-BD3B-4E56-B99F-E7DC2EDBF432}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5C2FE24-BD3B-4E56-B99F-E7DC2EDBF432}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5C2FE24-BD3B-4E56-B99F-E7DC2EDBF432}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

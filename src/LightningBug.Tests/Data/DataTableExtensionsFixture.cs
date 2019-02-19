@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using Should;
+using Shouldly;
 using Xunit;
 
 namespace LightningBug.Data
@@ -38,11 +38,11 @@ namespace LightningBug.Data
         public void CanGetSchemaDataTable()
         {
             var dt = DataTableExtensions.GetSchemaTable<TestClass>();
-            dt.Columns.Count.ShouldEqual(3);
-            dt.Columns["Id"].DataType.ShouldEqual(typeof(Guid));
-            dt.Columns["Name"].DataType.ShouldEqual(typeof(string));
-            dt.Columns["EmployeeId"].DataType.ShouldEqual(typeof(int));
-            dt.Rows.Count.ShouldEqual(0);
+            dt.Columns.Count.ShouldBe(3);
+            dt.Columns["Id"].DataType.ShouldBe(typeof(Guid));
+            dt.Columns["Name"].DataType.ShouldBe(typeof(string));
+            dt.Columns["EmployeeId"].DataType.ShouldBe(typeof(int));
+            dt.Rows.Count.ShouldBe(0);
         }
 
         [Fact]
@@ -55,17 +55,17 @@ namespace LightningBug.Data
             };
 
             var dt = source.AsDataTable();
-            dt.Columns.Count.ShouldEqual(3);
-            dt.Columns["Id"].DataType.ShouldEqual(typeof(Guid));
-            dt.Columns["Name"].DataType.ShouldEqual(typeof(string));
-            dt.Columns["EmployeeId"].DataType.ShouldEqual(typeof(int));
-            dt.Rows.Count.ShouldEqual(2);
-            dt.Rows[0]["Id"].ShouldEqual(source[0].Id);
-            dt.Rows[0]["Name"].ShouldEqual(source[0].Name);
-            dt.Rows[0]["EmployeeId"].ShouldEqual(source[0].EmployeeId);
-            dt.Rows[1]["Id"].ShouldEqual(source[1].Id);
-            dt.Rows[1]["Name"].ShouldEqual(source[1].Name);
-            dt.Rows[1]["EmployeeId"].ShouldEqual(source[1].EmployeeId);
+            dt.Columns.Count.ShouldBe(3);
+            dt.Columns["Id"].DataType.ShouldBe(typeof(Guid));
+            dt.Columns["Name"].DataType.ShouldBe(typeof(string));
+            dt.Columns["EmployeeId"].DataType.ShouldBe(typeof(int));
+            dt.Rows.Count.ShouldBe(2);
+            dt.Rows[0]["Id"].ShouldBe(source[0].Id);
+            dt.Rows[0]["Name"].ShouldBe(source[0].Name);
+            dt.Rows[0]["EmployeeId"].ShouldBe(source[0].EmployeeId);
+            dt.Rows[1]["Id"].ShouldBe(source[1].Id);
+            dt.Rows[1]["Name"].ShouldBe(source[1].Name);
+            dt.Rows[1]["EmployeeId"].ShouldBe(source[1].EmployeeId);
         }
 
         [Fact]
@@ -82,13 +82,13 @@ namespace LightningBug.Data
             dt.Rows[1]["EmployeeId"] = 234567;
 
             var result = dt.Convert<TestClass>().ToArray();
-            result.Length.ShouldEqual(2);
-            result[0].Id.ShouldEqual(dt.Rows[0]["Id"]);
-            result[0].Name.ShouldEqual(dt.Rows[0]["Name"]);
-            result[0].EmployeeId.ShouldEqual(dt.Rows[0]["EmployeeId"]);
-            result[1].Id.ShouldEqual(dt.Rows[1]["Id"]);
-            result[1].Name.ShouldEqual(dt.Rows[1]["Name"]);
-            result[1].EmployeeId.ShouldEqual(dt.Rows[1]["EmployeeId"]);
+            result.Length.ShouldBe(2);
+            result[0].Id.ShouldBe(dt.Rows[0]["Id"]);
+            result[0].Name.ShouldBe(dt.Rows[0]["Name"]);
+            result[0].EmployeeId.ShouldBe(dt.Rows[0]["EmployeeId"]);
+            result[1].Id.ShouldBe(dt.Rows[1]["Id"]);
+            result[1].Name.ShouldBe(dt.Rows[1]["Name"]);
+            result[1].EmployeeId.ShouldBe(dt.Rows[1]["EmployeeId"]);
         }
 
         [Fact]
@@ -106,14 +106,14 @@ namespace LightningBug.Data
 
             var dependency = new UriBuilder();
             var result = dt.Convert(() => new TestClassWithDependency(dependency)).ToArray();
-            result.Length.ShouldEqual(2);
-            result[0].Id.ShouldEqual(dt.Rows[0]["Id"]);
-            result[0].Name.ShouldEqual(dt.Rows[0]["Name"]);
-            result[0].EmployeeId.ShouldEqual(dt.Rows[0]["EmployeeId"]);
+            result.Length.ShouldBe(2);
+            result[0].Id.ShouldBe(dt.Rows[0]["Id"]);
+            result[0].Name.ShouldBe(dt.Rows[0]["Name"]);
+            result[0].EmployeeId.ShouldBe(dt.Rows[0]["EmployeeId"]);
             result[0].GetDependency().ShouldBeSameAs(dependency);
-            result[1].Id.ShouldEqual(dt.Rows[1]["Id"]);
-            result[1].Name.ShouldEqual(dt.Rows[1]["Name"]);
-            result[1].EmployeeId.ShouldEqual(dt.Rows[1]["EmployeeId"]);
+            result[1].Id.ShouldBe(dt.Rows[1]["Id"]);
+            result[1].Name.ShouldBe(dt.Rows[1]["Name"]);
+            result[1].EmployeeId.ShouldBe(dt.Rows[1]["EmployeeId"]);
             result[1].GetDependency().ShouldBeSameAs(dependency);
         }
 

@@ -1,3 +1,3 @@
 ﻿using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("LightningBug.Tests.Core")]
+[assembly: InternalsVisibleTo("LightningBug.Tests")]

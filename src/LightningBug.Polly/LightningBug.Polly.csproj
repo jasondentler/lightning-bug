@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.2.0.19</Version>
+    <Version>1.2.0.20</Version>
     <Authors>Jason Dentler</Authors>
     <Description>Decorate a service interface with Polly policies for resilience and transient-fault-handling with patterns such as Retry, Circuit Breaker, Timeout, Bulkhead Isolation, and Fallback</Description>
     <Copyright>(c) 2018 Jason Dentler</Copyright>
@@ -16,9 +16,9 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.1.1" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.1.1" />
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-    <PackageReference Include="Polly" Version="6.1.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageReference Include="Polly" Version="7.0.2" />
     <PackageReference Include="System.Reflection.DispatchProxy" Version="4.5.1" />
   </ItemGroup>
 

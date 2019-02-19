@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Should;
+using Shouldly;
 using Xunit;
 
 namespace LightningBug.Reflection
@@ -31,7 +31,7 @@ namespace LightningBug.Reflection
         [Fact]
         public void HasCorrectPropertyNames()
         {
-            GetterDelegateCache<TestClass>.ReadablePropertyNames.Count().ShouldEqual(2);
+            GetterDelegateCache<TestClass>.ReadablePropertyNames.Count().ShouldBe(2);
             GetterDelegateCache<TestClass>.ReadablePropertyNames.ShouldContain("MyInt");
             GetterDelegateCache<TestClass>.ReadablePropertyNames.ShouldContain("MyReadOnlyInt");
         }
@@ -39,13 +39,13 @@ namespace LightningBug.Reflection
         [Fact]
         public void HasCorrectPropertyCount()
         {
-            GetterDelegateCache<TestClass>.ReadablePropertyCount.ShouldEqual(2);
+            GetterDelegateCache<TestClass>.ReadablePropertyCount.ShouldBe(2);
         }
 
         [Fact]
         public void TypesHasCorrectPropertyNames()
         {
-            GetterDelegateCache<TestClass>.Types.Count.ShouldEqual(2);
+            GetterDelegateCache<TestClass>.Types.Count.ShouldBe(2);
             GetterDelegateCache<TestClass>.Types.Keys.ShouldContain("MyInt");
             GetterDelegateCache<TestClass>.Types.Keys.ShouldContain("MyReadOnlyInt");
         }
@@ -63,7 +63,7 @@ namespace LightningBug.Reflection
         {
             GetterDelegateCache<TestClass>.OrdinalLookup
                 .ToList()
-                .ForEach(kv => GetterDelegateCache<TestClass>.OrdinalLookup[kv.Key].ShouldEqual(kv.Value));
+                .ForEach(kv => GetterDelegateCache<TestClass>.OrdinalLookup[kv.Key].ShouldBe(kv.Value));
         }
 
         [Fact]
@@ -78,14 +78,14 @@ namespace LightningBug.Reflection
         public void CanReadPublicProperty()
         {
             var x = new TestClass() {MyInt = 1};
-            GetterDelegateCache<TestClass>.Read("MyInt", x).ShouldEqual(1);
+            GetterDelegateCache<TestClass>.Read("MyInt", x).ShouldBe(1);
         }
 
         [Fact]
         public void CanReadReadOnlyProperty()
         {
             var x = new TestClass() {MyInt = 2};
-            GetterDelegateCache<TestClass>.Read("MyReadOnlyInt", x).ShouldEqual(2);
+            GetterDelegateCache<TestClass>.Read("MyReadOnlyInt", x).ShouldBe(2);
         }
 
         [Fact]
@@ -93,7 +93,7 @@ namespace LightningBug.Reflection
         {
             var x = new TestClass() { MyInt = 3 };
             var ordinal = GetterDelegateCache<TestClass>.OrdinalLookup["MyInt"];
-            GetterDelegateCache<TestClass>.Read(ordinal, x).ShouldEqual(3);
+            GetterDelegateCache<TestClass>.Read(ordinal, x).ShouldBe(3);
         }
 
         [Fact]
@@ -101,7 +101,7 @@ namespace LightningBug.Reflection
         {
             var x = new TestClass() { MyInt = 4 };
             var ordinal = GetterDelegateCache<TestClass>.OrdinalLookup["MyReadOnlyInt"];
-            GetterDelegateCache<TestClass>.Read(ordinal, x).ShouldEqual(4);
+            GetterDelegateCache<TestClass>.Read(ordinal, x).ShouldBe(4);
         }
 
     }

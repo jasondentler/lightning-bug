@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Moq;
-using SharpTestsEx;
-using Should;
+using Shouldly;
 using Xunit;
 
 namespace LightningBug.Data.ETL.Operations
@@ -25,7 +24,7 @@ namespace LightningBug.Data.ETL.Operations
 
             var results = wrapper.Execute(expected).ToArray();
 
-            results.Should().Have.SameSequenceAs(expected);
+            results.ShouldBe(expected);
         }
 
         [Fact]
@@ -36,7 +35,7 @@ namespace LightningBug.Data.ETL.Operations
             operation.SetupGet(o => o.Name).Returns(expected);
 
             var wrapper = new MultiThreadedOperationWrapper<int, int>(operation.Object);
-            wrapper.Name.ShouldEqual(expected);
+            wrapper.Name.ShouldBe(expected);
         }
 
     }

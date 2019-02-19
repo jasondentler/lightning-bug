@@ -46,38 +46,59 @@ namespace LightningBug.Polly.Providers.Attributes
         {
         }
 
-        public class TestPolicy : Policy
+        private class AsyncTestPolicy : AsyncPolicy
+        {
+            
+            public string Name { get; }
+            public int Order { get; }
+
+            public AsyncTestPolicy(string name, int order)
+            {
+                Name = name;
+                Order = order;
+            }
+
+            public AsyncTestPolicy(string name, int order, bool configureAwait)
+            {
+                Name = name;
+                Order = order;
+            }
+
+            protected override Task<TResult> ImplementationAsync<TResult>(Func<Context, CancellationToken, Task<TResult>> action, Context context, CancellationToken cancellationToken,
+                bool continueOnCapturedContext)
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        private class TestPolicy : Policy
         {
             public string Name { get; }
             public int Order { get; }
 
-            public TestPolicy(string name, int order) : base(ExceptionPolicy, Enumerable.Empty<ExceptionPredicate>())
+            public TestPolicy(string name, int order)
             {
                 Name = name;
                 Order = order;
             }
 
-            public TestPolicy(string name, int order, bool configureAwait) : base(AsyncExceptionPolicy, Enumerable.Empty<ExceptionPredicate>())
+            public TestPolicy(string name, int order, bool configureAwait)
             {
                 Name = name;
                 Order = order;
             }
 
-            private static Task AsyncExceptionPolicy(Func<Context, CancellationToken, Task> arg1, Context arg2, CancellationToken arg3, bool arg4)
+            protected override TResult Implementation<TResult>(Func<Context, CancellationToken, TResult> action, Context context, CancellationToken cancellationToken)
             {
-                return Task.CompletedTask;
+                throw new NotImplementedException();
             }
-
-            private static void ExceptionPolicy(Action<Context, CancellationToken> arg1, Context arg2, CancellationToken arg3)
-            {
-            }
-
         }
 
         public class TestPolicyAttribute : PolicyAttribute
         {
             public string Name { get; set; }
             public int Order { get; set; }
+
             protected internal override int GetOrder()
             {
                 return Order;
@@ -117,7 +138,7 @@ namespace LightningBug.Polly.Providers.Attributes
             protected override IAsyncPolicy GetAsyncPolicy(CallContextBase context, PolicyAttribute attribute)
             {
                 var testAttribute = (TestPolicyAttribute)attribute;
-                var policy = new TestPolicy(testAttribute.Name, testAttribute.Order, false);
+                var policy = new AsyncTestPolicy(testAttribute.Name, testAttribute.Order, false);
                 return policy;
             }
 

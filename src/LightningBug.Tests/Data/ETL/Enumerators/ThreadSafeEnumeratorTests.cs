@@ -2,7 +2,7 @@
 using System.Collections.Concurrent;
 using System.Linq;
 using System.Threading;
-using SharpTestsEx;
+using Shouldly;
 using Xunit;
 
 namespace LightningBug.Data.ETL.Enumerators
@@ -23,7 +23,7 @@ namespace LightningBug.Data.ETL.Enumerators
 
             var result = threadSafeEnumerator.ToArray();
 
-            result.Should().Have.SameSequenceAs(expected);
+            result.ShouldBe(expected);
         }
 
         [Fact]
@@ -39,7 +39,7 @@ namespace LightningBug.Data.ETL.Enumerators
                     results.Enqueue(result);
             });
 
-            results.Should().Be.Empty();
+            results.ShouldBeEmpty();
 
             consumer.Start();
 
@@ -49,7 +49,7 @@ namespace LightningBug.Data.ETL.Enumerators
 
             consumer.Join(TimeSpan.FromSeconds(3)); // Wait for the consumer to finish
 
-            results.ToArray().Should().Have.SameSequenceAs(expected);
+            results.ToArray().ShouldBe(expected);
         }
     }
 }

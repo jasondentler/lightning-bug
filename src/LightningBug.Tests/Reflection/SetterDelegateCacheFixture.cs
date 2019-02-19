@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Should;
+using Shouldly;
 using Xunit;
 
 namespace LightningBug.Reflection
@@ -31,7 +31,7 @@ namespace LightningBug.Reflection
         [Fact]
         public void HasCorrectPropertyNames()
         {
-            SetterDelegateCache<TestClass>.WritablePropertyNames.Count().ShouldEqual(2);
+            SetterDelegateCache<TestClass>.WritablePropertyNames.Count().ShouldBe(2);
             SetterDelegateCache<TestClass>.WritablePropertyNames.ShouldContain("MyInt");
             SetterDelegateCache<TestClass>.WritablePropertyNames.ShouldContain("MyWriteOnlyInt");
         }
@@ -39,13 +39,13 @@ namespace LightningBug.Reflection
         [Fact]
         public void HasCorrectPropertyCount()
         {
-            SetterDelegateCache<TestClass>.WritablePropertyCount.ShouldEqual(2);
+            SetterDelegateCache<TestClass>.WritablePropertyCount.ShouldBe(2);
         }
 
         [Fact]
         public void TypesHasCorrectPropertyNames()
         {
-            SetterDelegateCache<TestClass>.Types.Count.ShouldEqual(2);
+            SetterDelegateCache<TestClass>.Types.Count.ShouldBe(2);
             SetterDelegateCache<TestClass>.Types.Keys.ShouldContain("MyInt");
             SetterDelegateCache<TestClass>.Types.Keys.ShouldContain("MyWriteOnlyInt");
         }
@@ -63,7 +63,7 @@ namespace LightningBug.Reflection
         {
             SetterDelegateCache<TestClass>.OrdinalLookup
                 .ToList()
-                .ForEach(kv => SetterDelegateCache<TestClass>.OrdinalLookup[kv.Key].ShouldEqual(kv.Value));
+                .ForEach(kv => SetterDelegateCache<TestClass>.OrdinalLookup[kv.Key].ShouldBe(kv.Value));
         }
 
         [Fact]
@@ -79,7 +79,7 @@ namespace LightningBug.Reflection
         {
             var x = new TestClass() {MyInt = 1};
             SetterDelegateCache<TestClass>.Write("MyInt", x, 2);
-            x.MyInt.ShouldEqual(2);
+            x.MyInt.ShouldBe(2);
         }
 
         [Fact]
@@ -87,7 +87,7 @@ namespace LightningBug.Reflection
         {
             var x = new TestClass() {MyInt = 2};
             SetterDelegateCache<TestClass>.Write("MyWriteOnlyInt", x, 3);
-            x.MyInt.ShouldEqual(3);
+            x.MyInt.ShouldBe(3);
         }
 
         [Fact]
@@ -96,7 +96,7 @@ namespace LightningBug.Reflection
             var x = new TestClass() {MyInt = 3};
             var ordinal = SetterDelegateCache<TestClass>.OrdinalLookup["MyInt"];
             SetterDelegateCache<TestClass>.Write(ordinal, x, 4);
-            x.MyInt.ShouldEqual(4);
+            x.MyInt.ShouldBe(4);
         }
 
         [Fact]
@@ -105,7 +105,7 @@ namespace LightningBug.Reflection
             var x = new TestClass() {MyInt = 4};
             var ordinal = SetterDelegateCache<TestClass>.OrdinalLookup["MyWriteOnlyInt"];
             SetterDelegateCache<TestClass>.Write(ordinal, x, 5);
-            x.MyInt.ShouldEqual(5);
+            x.MyInt.ShouldBe(5);
         }
 
     }
