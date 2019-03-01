@@ -1,7 +1,23 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
+    
     <PropertyGroup>
         <TargetFramework>netcoreapp2.2</TargetFramework>
+        <LangVersion>7.3</LangVersion>
+        <Version>1.3.2</Version>
+        <AssemblyVersion>1.3.2</AssemblyVersion>
+        <FileVersion>1.3.2</FileVersion>
+        <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+        <PackageVersion>1.3.2</PackageVersion>
+        <PackageIconUrl>http://lightningbug.jasondentler.com/images/lightningbug_vector.png</PackageIconUrl>
+        <PackageProjectUrl>http://lightningbug.jasondentler.com</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/jasondentler/lightning-bug</RepositoryUrl>
+        <Description>Lightning Bug is a collection of flashy but short-lived bits of code for common tasks.</Description>
+        <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+        <PackageTags>SQL data bug lightning bulk copy</PackageTags>
+        <Authors>Jason Dentler</Authors>
+        <Product>Lightning Bug</Product>
+        <Title>Lightning Bug</Title>
+        <Copyright>Copyright © 2019 Jason Dentler</Copyright>
     </PropertyGroup>
 
     <ItemGroup>
