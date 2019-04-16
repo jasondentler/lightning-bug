@@ -3,14 +3,17 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.2.0.20</Version>
+    <Version>1.3.3</Version>
+    <AssemblyVersion>1.3.3</AssemblyVersion>
+    <FileVersion>1.3.3</FileVersion>
+    <PackageVersion>1.3.3</PackageVersion>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <Authors>Jason Dentler</Authors>
     <Description>Decorate a service interface with Polly policies for resilience and transient-fault-handling with patterns such as Retry, Circuit Breaker, Timeout, Bulkhead Isolation, and Fallback</Description>
     <Copyright>(c) 2018 Jason Dentler</Copyright>
     <PackageProjectUrl>http://lightningbug.jasondentler.com/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/jasondentler/lightning-bug</RepositoryUrl>
     <PackageIconUrl>http://lightningbug.jasondentler.com/images/lightningbug_vector.png</PackageIconUrl>
-    <PackageLicenseUrl>https://github.com/jasondentler/lightning-bug/blob/master/LICENSE</PackageLicenseUrl>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 

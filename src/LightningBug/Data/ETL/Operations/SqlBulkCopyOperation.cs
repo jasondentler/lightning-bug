@@ -10,31 +10,59 @@ namespace LightningBug.Data.ETL.Operations
 {
     public class SqlBulkCopyOperation<TInput> : IOperation<TInput, object>
     {
-
+        private readonly SqlConnection _connection;
         private readonly Func<SqlConnection> _connectionProvider;
         private readonly string _destinationTable;
 
+        public SqlBulkCopyOperation(SqlConnection connection, string destinationTable)
+        {
+            if (string.IsNullOrWhiteSpace(destinationTable))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(destinationTable));
+            
+            _connection = connection ?? throw new ArgumentNullException(nameof(connection));
+            _destinationTable = destinationTable;
+        }
+
         public SqlBulkCopyOperation(Func<SqlConnection> connectionProvider, string destinationTable)
         {
-            _connectionProvider = connectionProvider;
+            if (string.IsNullOrWhiteSpace(destinationTable))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(destinationTable));
+            
+            _connectionProvider = connectionProvider ?? throw new ArgumentNullException(nameof(connectionProvider));
             _destinationTable = destinationTable;
-            using (var bcp = new SqlBulkCopy(""))
-                Timeout = TimeSpan.FromSeconds(bcp.BulkCopyTimeout);
         }
 
         public IEnumerable<object> Execute(IEnumerable<TInput> input)
         {
-            var reader = new ObjectDataReader<TInput>(input);
+            return _connection != null 
+                ? ExecuteWithProvidedConnection(input) 
+                : ExecuteWithConnectionProvider(input);
+        }
+
+        private IEnumerable<object> ExecuteWithConnectionProvider(IEnumerable<TInput> input)
+        {
             using (var conn = _connectionProvider())
             {
-                conn.Open();
-                using (var bcp = new SqlBulkCopy(conn))
-                {
-                    bcp.DestinationTableName = _destinationTable;
-                    bcp.BulkCopyTimeout = (int) Math.Ceiling(Timeout.TotalSeconds);
-                    SetupMappings(bcp);
-                    bcp.Insert(reader);
-                }
+                EnsureConnectionOpen(conn);
+                return ExecuteBulkCopy(input, conn);
+            }
+        }
+
+        private IEnumerable<object> ExecuteWithProvidedConnection(IEnumerable<TInput> input)
+        {
+            EnsureConnectionOpen(_connection);
+            return ExecuteBulkCopy(input, _connection);
+        }
+
+        private IEnumerable<object> ExecuteBulkCopy(IEnumerable<TInput> input, SqlConnection conn)
+        {
+            var reader = new ObjectDataReader<TInput>(input);
+            using (var bcp = new SqlBulkCopy(conn))
+            {
+                bcp.DestinationTableName = _destinationTable;
+                bcp.BulkCopyTimeout = (int) Math.Ceiling(Timeout.TotalSeconds);
+                SetupMappings(bcp);
+                bcp.Insert(reader);
             }
             return Enumerable.Empty<object>();
         }
@@ -65,6 +93,19 @@ namespace LightningBug.Data.ETL.Operations
             foreach (var map in properties.Intersect(columns, StringComparer.InvariantCultureIgnoreCase))
                 bcp.ColumnMappings.Add(new SqlBulkCopyColumnMapping(map, map));
 
+        }
+
+        private void EnsureConnectionOpen(SqlConnection conn)
+        {
+            switch (conn.State)
+            {
+                case ConnectionState.Closed:
+                case ConnectionState.Broken:
+                    conn.Open();
+                    return;
+                default:
+                    return;
+            }
         }
     }
 }
